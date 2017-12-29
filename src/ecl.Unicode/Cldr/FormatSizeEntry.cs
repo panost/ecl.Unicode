@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public class FormatSizeEntry {
         private string _full;
         /// <summary>

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
-using ecl.Unicode;
+using System.Text;
 
-namespace eclUnicode.Ucd {
-    [DebuggerDisplay("{Name},{CodeValue} '{ToString()}'")]
+namespace ecl.Unicode.Ucd {
+    [DebuggerDisplay("{Name},{CodeValue.ToString(\"X6\")} '{ToString()}'")]
     public struct UnicodeEntry : IComparable<int> {
         public string Name;
         public string EnumName;
@@ -44,7 +44,7 @@ namespace eclUnicode.Ucd {
         public int DecomposingLength {
             get {
                 int cnt = _decomposingStart;
-                if ( cnt < 0 )
+                if ( cnt <= 0 )
                     return -cnt;
                 if ( cnt > 0 ) {
                     cnt = 1;
@@ -149,6 +149,23 @@ namespace eclUnicode.Ucd {
         }
 
         public override string ToString() {
+            return char.ConvertFromUtf32( CodeValue );
+            //if ( CodeValue > char.MaxValue ) {
+            //    char[] surrogate = new char[ 2 ];
+            //    int utf32 = CodeValue - 0x10000;
+            //    const char HIGH_SURROGATE_START = '\ud800';
+            //    const char HIGH_SURROGATE_END = '\udbff';
+            //    const char LOW_SURROGATE_START = '\udc00';
+            //    const char LOW_SURROGATE_END = '\udfff';
+
+            //    surrogate[ 0 ] = (char)( ( utf32 / 0x400 ) + (int)HIGH_SURROGATE_START );
+            //    surrogate[ 1 ] = (char)( ( utf32 % 0x400 ) + (int)LOW_SURROGATE_START );
+            //    return new string( surrogate );
+            //}
+            //return ( (char)CodeValue ).ToString();
+        }
+
+        public void AppendCharTo( StringBuilder b ) {
             if ( CodeValue > char.MaxValue ) {
                 char[] surrogate = new char[ 2 ];
                 int utf32 = CodeValue - 0x10000;
@@ -157,11 +174,12 @@ namespace eclUnicode.Ucd {
                 const char LOW_SURROGATE_START = '\udc00';
                 const char LOW_SURROGATE_END = '\udfff';
 
-                surrogate[ 0 ] = (char)( ( utf32 / 0x400 ) + (int)HIGH_SURROGATE_START );
-                surrogate[ 1 ] = (char)( ( utf32 % 0x400 ) + (int)LOW_SURROGATE_START );
-                return new string( surrogate );
+                b.Append( (char)( ( utf32 / 0x400 ) + (int)HIGH_SURROGATE_START ) );
+                b.Append( (char)( ( utf32 % 0x400 ) + (int)LOW_SURROGATE_START ) );
+            } else {
+                b.Append( (char)CodeValue );
             }
-            return ( (char)CodeValue ).ToString();
+
         }
     }
 }

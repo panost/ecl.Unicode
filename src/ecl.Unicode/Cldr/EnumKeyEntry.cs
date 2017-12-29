@@ -1,7 +1,6 @@
 ﻿using System;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     struct EnumKeyEntry : IEquatable<EnumKeyEntry>, IComparable<EnumKeyEntry> {
         public readonly int Type;
         public readonly string Text;

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using ecl.Unicode;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     partial class UcdLoader {
         protected bool TryParseCodeRange( string start, out int begin, out int end ) {
             string stop = null;

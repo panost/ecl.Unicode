@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     enum NumericEntryType : byte {
         None,
         Decimal,

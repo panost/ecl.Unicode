@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     /// <summary>
     /// Unicode code point range
     /// </summary>

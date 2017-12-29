@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     [DebuggerDisplay( "Calendar {Name}" )]
     public class Calendar {
         private string _name;

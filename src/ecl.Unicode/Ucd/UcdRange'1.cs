@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Ucd {
+﻿namespace ecl.Unicode.Ucd {
     public class UcdRange<T> : UcdRange {
         public readonly T Owner;
 

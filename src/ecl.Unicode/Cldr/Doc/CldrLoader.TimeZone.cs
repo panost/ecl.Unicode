@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Xml;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     partial class CldrLoader {
         private Dictionary<string, TimeZoneType> _timeZoneInfoMap;
 

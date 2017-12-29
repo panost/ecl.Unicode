@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     public class LdmlAnyNode : LdmlNode {
         private LdmlAttribute _keyType;
         /// <summary>

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using ecl.Unicode;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     partial class UcdLoader {
         class AliasSection : NamedObject {
         }

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Text;
-using ecl.Unicode;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     /// <summary>
     /// 
     /// </summary>
@@ -190,6 +188,7 @@ namespace eclUnicode.Ucd {
             _propertyRanges = all.ToArray();
             UcdRange.Sort( _propertyRanges );
         }
+
         public IEnumerable<UnicodeEntry> GetCodePoints( int begin, int end ) {
             EnsureDataLoaded();
             if ( begin <= end ) {
@@ -197,13 +196,14 @@ namespace eclUnicode.Ucd {
                 if ( idx < 0 ) {
                     idx = ~idx;
                 }
-                for ( ; idx < _entries.Length; idx++ ) {
-                    if ( _entries[ idx ].CodeValue <= end ) {
-                        yield return _entries[ idx ];
-                    }
+
+                for ( ; idx < _entries.Length &&
+                    _entries[ idx ].CodeValue <= end; idx++ ) {
+                    yield return _entries[ idx ];
                 }
             }
         }
+
         public IEnumerable<UnicodeEntry> GetCodePoints( UcdRange range ) {
             return GetCodePoints( range.Begin, range.End );
         }

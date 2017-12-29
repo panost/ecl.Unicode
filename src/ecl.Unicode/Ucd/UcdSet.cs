@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     public abstract class UcdContainer {
         public abstract bool Contains( int codePoint );
         //HashSet<int> a;

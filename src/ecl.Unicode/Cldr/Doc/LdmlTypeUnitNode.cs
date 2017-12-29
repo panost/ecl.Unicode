@@ -1,8 +1,6 @@
-﻿using System;
-using System.Text;
-using ecl.Unicode;
+﻿using System.Text;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     class LdmlTypeUnitNode : LdmlNode {
         private CldrUnit _unit;
         /// <summary>

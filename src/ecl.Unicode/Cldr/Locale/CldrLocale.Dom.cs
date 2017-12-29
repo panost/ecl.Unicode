@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     partial class CldrLocale {
         public static readonly CldrLocale[] EmptyArray = new CldrLocale[ 0 ];
 

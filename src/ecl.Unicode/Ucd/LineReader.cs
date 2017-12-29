@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     [Flags]
     public enum TextReaderOptions {
         /// <summary>

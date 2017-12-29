@@ -1,8 +1,7 @@
-﻿using eclUnicode.Cldr.Locale;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     internal struct IndexedEntry<T> {
         public int Index;
         public T Value;

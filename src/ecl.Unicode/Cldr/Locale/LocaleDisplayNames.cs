@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     public class LocaleDisplayNamesNode : LdmlNoKeyNode {
         internal override LdmlNode CreateChildNode( string name ) {
             switch ( name ) {

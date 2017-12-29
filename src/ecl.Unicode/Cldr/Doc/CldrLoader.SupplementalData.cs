@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Xml;
-using ecl.Unicode;
-using eclUnicode.Cldr.Locale;
+using ecl.Unicode.Cldr.Locale;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     partial class CldrLoader {
         private readonly Dictionary<string, LanguageInfo> _localeInfo =
             new Dictionary<string, LanguageInfo>( StringComparer.OrdinalIgnoreCase );

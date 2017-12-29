@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     public struct LdmlAttributeValue {
         public static readonly LdmlAttributeValue[] EmptyArray = new LdmlAttributeValue[ 0 ];
         public LdmlAttribute Name;

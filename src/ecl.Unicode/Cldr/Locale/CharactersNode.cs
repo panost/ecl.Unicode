@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     public class CharactersNode: LdmlNoKeyNode {
         internal override LdmlNode CreateChildNode( string name ) {
             //switch( name ) {

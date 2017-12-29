@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public class UnitOfMeasure {
         //public readonly LocaleData Locale;
         public readonly string Name;

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     /// <summary>
     /// 
     /// </summary>

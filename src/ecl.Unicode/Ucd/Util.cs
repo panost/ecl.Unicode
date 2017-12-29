@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Xml.Linq;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     public static class Util {
         internal static Dictionary<int, string> GetAlternativeNames() {
             Dictionary<int, string> map = new Dictionary<int, string>();

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.Xml;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     [Flags]
     public enum TerritoryTypes : byte {
         Group = 1,

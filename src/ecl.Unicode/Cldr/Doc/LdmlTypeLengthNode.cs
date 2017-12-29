@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     class LdmlTypeLengthNode : LdmlNode {
         private FormatLength _length;
         /// <summary>

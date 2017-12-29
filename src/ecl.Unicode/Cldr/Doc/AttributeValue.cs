@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     struct AttributeValue {
         public static readonly AttributeValue[] EmptyArray = new AttributeValue[ 0 ];
         public string Name;

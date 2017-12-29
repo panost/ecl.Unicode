@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     static class LdmlUtil {
         public static string GetText( this LdmlNode root ) {
             if ( root != null ) {

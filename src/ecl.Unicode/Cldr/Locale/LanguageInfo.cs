@@ -1,7 +1,4 @@
-﻿using System;
-using ecl.Unicode;
-
-namespace eclUnicode.Cldr.Locale {
+﻿namespace ecl.Unicode.Cldr.Locale {
     class LanguageInfo : CodeObjectBase {
         /// <summary>
         /// if true is the default locale of it's resource parent

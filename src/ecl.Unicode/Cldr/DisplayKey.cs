@@ -1,6 +1,6 @@
-﻿using eclUnicode.Cldr.Doc;
+﻿using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public enum DisplayKey : byte {
         [KeyCode( "calendar" )]
         Calendar=1,

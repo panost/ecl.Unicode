@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Cldr.Doc {
+﻿namespace ecl.Unicode.Cldr.Doc {
     struct NodePathEntry {
         public string Name;
         public LdmlAttributeValue[] Attributes;

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Xml;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     partial class CldrLoader {
         enum AliasReason {
             Deprecated=1,

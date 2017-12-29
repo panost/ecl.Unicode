@@ -1,6 +1,6 @@
-﻿using eclUnicode.Cldr.Doc;
+﻿using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     public class NumberSymbolsNode : LdmlAnyNode {
 
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public class MetaTimeZone : NamedObject {
         private TimeZoneType _default;
         /// <summary>

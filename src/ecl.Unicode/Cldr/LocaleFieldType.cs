@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Cldr {
+﻿namespace ecl.Unicode.Cldr {
     public enum LocaleFieldType : byte {
         Default,
         StandAlone,

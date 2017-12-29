@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public class Currency : CodeObjectBase {
         private string _name;
         /// <summary>

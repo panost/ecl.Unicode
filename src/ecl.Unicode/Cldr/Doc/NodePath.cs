@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     internal class NodePath {
         private static readonly char[] _pathDelims = { '/', '[' };
 

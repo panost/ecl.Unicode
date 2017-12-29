@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Globalization;
-using eclUnicode.Cldr.Doc;
 using System.Collections.Generic;
-using ecl.Unicode;
+using System.Globalization;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     public class NumberFormatsNode : LdmlAnyNode {
         public readonly NumberType Type;
 
@@ -105,16 +104,16 @@ namespace eclUnicode.Cldr.Locale {
             public IEnumerable<Format> GetFormats() {
                 return ChildrenOf<Format>();
             }
-            private eclUnicode.Cldr.FormatLength _type;
+            private Cldr.FormatLength _type;
             /// <summary>
             /// 
             /// </summary>
-            public eclUnicode.Cldr.FormatLength Length {
+            public Cldr.FormatLength Length {
                 get {
                     if( _type == 0 ) {
                         var val = this.GetAttribute( LdmlAttribute.Count );
                         if( !val.HasValue() || !Enum.TryParse( val, true, out _type ) ) {
-                            _type = eclUnicode.Cldr.FormatLength.Narrow;
+                            _type = Cldr.FormatLength.Narrow;
                         }
                     }
                     return _type;
@@ -133,11 +132,11 @@ namespace eclUnicode.Cldr.Locale {
             return ChildrenOf<FormatLength>();
         }
 
-        public FormatLength GetFormatLength( eclUnicode.Cldr.FormatLength length = eclUnicode.Cldr.FormatLength.Narrow ) {
+        public FormatLength GetFormatLength( Cldr.FormatLength length = Cldr.FormatLength.Narrow ) {
             switch ( length ) {
-            case eclUnicode.Cldr.FormatLength.Narrow:
-            case eclUnicode.Cldr.FormatLength.Long:
-            case eclUnicode.Cldr.FormatLength.Short:
+            case Cldr.FormatLength.Narrow:
+            case Cldr.FormatLength.Long:
+            case Cldr.FormatLength.Short:
                 foreach( var flen in GetFormatLengths() ) {
                     if( flen.Length == length ) {
                         return flen;

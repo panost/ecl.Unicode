@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace eclUnicode.Cldr.Locale {
+﻿namespace ecl.Unicode.Cldr.Locale {
     public enum EllipsisType {
         Standard,
         final,

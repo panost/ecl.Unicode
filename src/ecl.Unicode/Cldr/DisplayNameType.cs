@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Cldr {
+﻿namespace ecl.Unicode.Cldr {
     public enum DisplayNameType : byte {
         Calendar = 1,
         Collation,

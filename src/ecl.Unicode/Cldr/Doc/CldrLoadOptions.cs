@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     [Flags]
     public enum CldrLoadOptions {
         Normal,

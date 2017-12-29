@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using System.Xml;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     /// <summary>
     /// LOCALE DATA MARKUP LANGUAGE (LDML) document
     /// </summary>

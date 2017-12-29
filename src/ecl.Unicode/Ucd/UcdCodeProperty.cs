@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using ecl.Unicode;
+﻿using System.Collections.Generic;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     public class UcdCodeProperty : CodeObjectBase {
         /// <summary>
         /// 

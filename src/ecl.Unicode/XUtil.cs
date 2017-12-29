@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using eclUnicode.Cldr;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr;
+using ecl.Unicode.Cldr.Doc;
 using JetBrains.Annotations;
 
 namespace ecl.Unicode {
@@ -64,28 +64,7 @@ namespace ecl.Unicode {
                 }
                 return ~index;
             }
-            private int BinaryMax( int found, int last ) {
-                int max = found + 1;
-                while( max <= last ) {
-                    int newIndex = Search( max, last - max + 1 );
-                    if( newIndex < 0 ) {
-                        break;
-                    }
-                    max = newIndex + 1;
-                }
-                return max - 1;
-            }
-            private int BinaryMin( int found, int index ) {
-                int min = found - 1;
-                while( min >= index ) {
-                    int newIndex = Search( index, min - index + 1 );
-                    if( newIndex < 0 ) {
-                        break;
-                    }
-                    min = newIndex - 1;
-                }
-                return min + 1;
-            }
+            
             public int GetRange( int index, int length, out int end ) {
                 const int LinearLimit = 6;
 
@@ -112,7 +91,7 @@ namespace ecl.Unicode {
                         end = c - 1;
                         return index;
                     }
-                    if( c > 0 ) {
+                    if( c < 0 ) {
                         index = mid + 1;
                         length -= midLength + 1;
                     } else {
@@ -121,6 +100,29 @@ namespace ecl.Unicode {
                 }
                 end = 0;
                 return ~index;
+            }
+
+            private int BinaryMax( int found, int last ) {
+                int max = found + 1;
+                while ( max <= last ) {
+                    int newIndex = Search( max, last - max + 1 );
+                    if ( newIndex < 0 ) {
+                        break;
+                    }
+                    max = newIndex + 1;
+                }
+                return max - 1;
+            }
+            private int BinaryMin( int found, int index ) {
+                int min = found - 1;
+                while ( min >= index ) {
+                    int newIndex = Search( index, min - index + 1 );
+                    if ( newIndex < 0 ) {
+                        break;
+                    }
+                    min = newIndex - 1;
+                }
+                return min + 1;
             }
         }
         internal static int BinaryFind<T, M>( this T[] entries, M value ) 

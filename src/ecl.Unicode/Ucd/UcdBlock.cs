@@ -1,8 +1,7 @@
 ﻿using System;
-using ecl.Unicode;
 
-namespace eclUnicode.Ucd {
-    public class UcdBlock : UcdRange {
+namespace ecl.Unicode.Ucd {
+    public class UcdBlock : UcdRange, IComparable<UcdBlock>{
         public readonly string Name;
         internal readonly UcdLoader _context;
 
@@ -14,12 +13,18 @@ namespace eclUnicode.Ucd {
         internal UcdBlock( string name ) {
             Name = name;
         }
-        
+
+        public Block Block => (Block)Begin;
+
         //public static readonly UcdBlock None = new UcdBlock( "None" );
 
         //public IEnumerable<UnicodeEntry> GetCodePoints() {
         //    return _context.GetCodePoints( Begin, End );
         //}
+        int IComparable<UcdBlock>.CompareTo( UcdBlock other ) {
+            return base.CompareTo( other );
+        }
+
         public override string ToString() {
             if ( Length <= 0 ) {
                 return Name ?? "Empty";

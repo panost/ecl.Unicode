@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
-using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     public abstract class LdmlNode : NamedObject, IEquatable<LdmlNode> {
         //internal int _nodeId;
         public static readonly LdmlNode[] EmptyArray = new LdmlNode[ 0 ];

@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     class TerritoriesNode : LdmlNoKeyNode {
         //internal override LdmlNode CreateChildNode( string name ) {
         //    if ( name == "territory" ) {

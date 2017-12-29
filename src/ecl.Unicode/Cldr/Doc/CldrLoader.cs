@@ -5,10 +5,9 @@ using System.IO;
 using System.IO.Compression;
 using System.Threading;
 using System.Xml;
-using ecl.Unicode;
-using eclUnicode.Cldr.Locale;
+using ecl.Unicode.Cldr.Locale;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     public partial class CldrLoader : IDisposable {
         public readonly string Root;
         private ZipArchive _zip;

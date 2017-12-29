@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public class TimeZoneType : NamedObject {
         private List<DateRangeValue<MetaTimeZone>> _uses = new List<DateRangeValue<MetaTimeZone>>();
         /// <summary>

@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Ucd {
+﻿namespace ecl.Unicode.Ucd {
     /// <summary>
     /// 
     /// </summary>

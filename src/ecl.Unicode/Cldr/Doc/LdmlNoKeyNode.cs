@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Cldr.Doc {
+﻿namespace ecl.Unicode.Cldr.Doc {
     public class LdmlNoKeyNode : LdmlNode {
         public override bool SameNode( LdmlNode other ) {
             return other != null

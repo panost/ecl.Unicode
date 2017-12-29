@@ -4,10 +4,8 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using ecl.Unicode;
 
-namespace eclUnicode.Ucd {
+namespace ecl.Unicode.Ucd {
     // http://www.unicode.org/reports/tr44/#UnicodeData.txt
     partial class UcdLoader {
         private static bool TryParseHex( string text, out int code ) {
@@ -73,6 +71,7 @@ namespace eclUnicode.Ucd {
             _entries = ldr.GetEntries();
             _decomposings = ldr._decomposings.ToArray();
         }
+        
         public void EnsureDataLoaded() {
             if( _entries == null ) {
                 LoadData();
@@ -142,6 +141,8 @@ namespace eclUnicode.Ucd {
                     if ( !TryParseHex( segs[ 0 ], out _entry.CodeValue ) ) {
                         continue;
                     }
+
+                    
                     if ( _entry.CodeValue > _owner._maxCodePoint ) {
                         break;
                     }

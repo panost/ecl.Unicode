@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace eclUnicode.Ucd {
+﻿namespace ecl.Unicode.Ucd {
     struct NamedRange {
         public readonly int Begin;
         public readonly int End;

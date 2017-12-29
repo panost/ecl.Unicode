@@ -1,4 +1,4 @@
-﻿namespace eclUnicode.Cldr.Doc {
+﻿namespace ecl.Unicode.Cldr.Doc {
     public enum LdmlAttribute : byte {
         None,
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public struct LocaleFieldPair : IEquatable<LocaleFieldPair> {
         private readonly byte _value;
         /// <summary>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     /// <summary>
     /// 3bits 0-7
     /// </summary>

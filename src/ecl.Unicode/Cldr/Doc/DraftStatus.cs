@@ -1,6 +1,7 @@
-﻿using ecl.Unicode;
+﻿using System;
+using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Doc {
+namespace ecl.Unicode.Cldr.Doc {
     [System.Flags]
     public enum DraftStatus : byte {
         None,
@@ -9,11 +10,6 @@ namespace eclUnicode.Cldr.Doc {
         Contributed = 4,
         Approved = 8
     }
-}
-
-namespace eclUnicode.Cldr {
-    using System;
-    using eclUnicode.Cldr.Doc;
 
     public static partial class CldrUtil {
 

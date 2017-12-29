@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using ecl.Unicode;
-using eclUnicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Doc;
 
-namespace eclUnicode.Cldr {
+namespace ecl.Unicode.Cldr {
     public enum DateFieldType : byte {
         Era = 1,
         Year,

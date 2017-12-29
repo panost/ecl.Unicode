@@ -1,7 +1,7 @@
-﻿
+﻿using System;
 using ecl.Unicode;
 
-namespace eclUnicode.Cldr.Locale {
+namespace ecl.Unicode.Cldr.Locale {
     public enum NumberType : byte {
         Unknown,
         Currency,
@@ -10,11 +10,6 @@ namespace eclUnicode.Cldr.Locale {
         Scientific,
         Accounting
     }
-}
-
-namespace eclUnicode.Cldr {
-    using System;
-    using eclUnicode.Cldr.Locale;
 
     public static partial class CldrUtil {
         private static readonly string[] _numberTypes = {
