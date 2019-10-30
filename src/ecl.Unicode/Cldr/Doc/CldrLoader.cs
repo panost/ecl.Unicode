@@ -51,7 +51,8 @@ namespace ecl.Unicode.Cldr.Doc {
             while ( parentInfo == null ) {
                 int idx = localeName.LastIndexOf( '_' );
                 if ( idx > 0 ) {
-                    parentInfo = ResolveLanguage( localeName.Substring( 0, idx ) );
+                    localeName = localeName.Substring( 0, idx );
+                    parentInfo = FindLanguage( ref localeName );
                 } else {
                     break;
                 }
@@ -83,6 +84,17 @@ namespace ecl.Unicode.Cldr.Doc {
                     }
                 }
             }
+            
+            if ( ( LoadOptions & CldrLoadOptions.Subdivision ) != 0 ) {
+                reader = TryOpenXmlFile( "subdivisions", name );
+                if ( reader != null ) {
+                    try {
+                        doc.LocaleDisplayNames.LoadMisc( reader, "subdivisions" );
+                    } finally {
+                        reader.Dispose();
+                    }
+                }
+            }
             doc.Loaded();
             if ( _descriptionsProvider != null ) {
                 doc.ResolveDescription( _descriptionsProvider );
@@ -94,7 +106,7 @@ namespace ecl.Unicode.Cldr.Doc {
         private CldrLocale[] _allLoaded;
 
         public void EnsureAllLocalesLoaded() {
-            if ( _allLoaded == null )
+            if ( _allLoaded != null )
                 return;
             foreach ( string name in GetAllLocaleNames() ) {
                 GetLocale( name );
@@ -170,8 +182,7 @@ namespace ecl.Unicode.Cldr.Doc {
             return null;
         }
         internal XmlReader TryOpenXmlFile( string folder, string name ) {
-            string fileName;
-            Stream stream = TryOpenFile( folder, name, out fileName );
+            Stream stream = TryOpenFile( folder, name, out _ );
             if ( stream != null ) {
                 return XmlReader.Create( stream, _xmlSettings );
             }
@@ -191,7 +202,6 @@ namespace ecl.Unicode.Cldr.Doc {
         public readonly CldrLoadOptions LoadOptions;
 
         public CldrLoader( string rootPath, CldrLoadOptions loadOptions = CldrLoadOptions.Normal ) {
-            LoadOptions = loadOptions;
             if ( File.Exists( rootPath ) ) {
                 _zip = ZipFile.OpenRead( rootPath );
             } else {
@@ -214,6 +224,18 @@ namespace ecl.Unicode.Cldr.Doc {
             using ( XmlReader reader = OpenXmlFile( "supplemental", "supplementalMetadata" ) ) {
                 loader.LoadMetaData( reader );
             }
+
+            if ( ( loadOptions & CldrLoadOptions.Subdivision ) != 0 ) {
+                using ( XmlReader reader = TryOpenXmlFile( "supplemental", "subdivisions" ) ) {
+                    if ( reader != null ) {
+                        loader.LoadSubdivisions( reader );
+                    } else {
+                        loadOptions &= ~CldrLoadOptions.Subdivision;
+                    }
+                }
+            }
+            LoadOptions = loadOptions;
+
             using ( XmlReader reader = OpenXmlFile( "supplemental", "supplementalData" ) ) {
                 loader.Load( reader );
             }
@@ -293,16 +315,20 @@ namespace ecl.Unicode.Cldr.Doc {
                 return;
             _descriptionsProvider = provider;
             var names = provider.LocaleDisplayNames.TerritoryNames;
+            var snames = provider.LocaleDisplayNames.SubdivisionNames;
             foreach ( Territory ter in _territories.Values ) {
-                string name;
-                if ( names.TryGetValue( ter, out name ) ) {
+                if ( names.TryGetValue( ter, out string name )
+                     || snames != null 
+                     && snames.TryGetValue( ter, out name ) ) {
                     ter.Description = name;
                 }
             }
+
             foreach ( LanguageInfo info in _localeInfo.Values ) {
                 info.Locale?.ResolveDescription( provider );
             }
         }
+
         private readonly Dictionary<string, string> _ldmlNames = new Dictionary<string, string>( StringComparer.Ordinal );
         private Dictionary<string, WritingScript> _scripts;
 

@@ -84,8 +84,7 @@ namespace ecl.Unicode.Cldr.Doc {
                     }
                 }
                 if ( code.HasValue() && info.Replacement.HasValue() ) {
-                    AliasInfo other;
-                    if ( aliasMap.TryGetValue( code, out other ) ) {
+                    if ( aliasMap.ContainsKey( code ) ) {
                         throw new Exception( $"Duplicate alias {code} specified" );
                     }
                     aliasMap.Add( code, info );

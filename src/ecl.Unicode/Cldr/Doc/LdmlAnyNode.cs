@@ -7,12 +7,8 @@ namespace ecl.Unicode.Cldr.Doc {
         /// 
         /// </summary>
         public LdmlAttribute KeyType {
-            get {
-                return _keyType;
-            }
-            set {
-                _keyType = value;
-            }
+            get => _keyType;
+            set => _keyType = value;
         }
 
         private LdmlAttribute _altKeyType;
@@ -20,12 +16,8 @@ namespace ecl.Unicode.Cldr.Doc {
         /// 
         /// </summary>
         public LdmlAttribute AltKeyType {
-            get {
-                return _altKeyType;
-            }
-            set {
-                _altKeyType = value;
-            }
+            get => _altKeyType;
+            set => _altKeyType = value;
         }
 
         private string _keyValue;
@@ -33,12 +25,8 @@ namespace ecl.Unicode.Cldr.Doc {
         /// 
         /// </summary>
         internal string KeyValue {
-            get {
-                return _keyValue;
-            }
-            set {
-                _keyValue = value;
-            }
+            get => _keyValue;
+            set => _keyValue = value;
         }
 
         private string _altKey;
@@ -46,12 +34,8 @@ namespace ecl.Unicode.Cldr.Doc {
         /// 
         /// </summary>
         public string AltKey {
-            get {
-                return _altKey;
-            }
-            set {
-                _altKey = value;
-            }
+            get => _altKey;
+            set => _altKey = value;
         }
         protected override bool HandleAttribute( LdmlAttribute attr, string value ) {
             if ( base.HandleAttribute( attr, value ) )

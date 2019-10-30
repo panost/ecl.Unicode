@@ -8,11 +8,16 @@
         NumberSystem,
 
         Count = 20,
+        Ordinal,
+        Subtype,
         Alt,
         Key,
+        Scope,
+        Level,
         Yeartype,
 
         Numbers,
+        Sample,
         // flag attributes
         Draft=200
     };

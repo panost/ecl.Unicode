@@ -401,5 +401,28 @@ namespace ecl.Unicode.Cldr.Doc {
             }
             return cloned;
         }
+
+        internal LdmlNode LoadMisc( XmlReader reader, string rootName ) {
+            reader.MoveToContent();
+            if ( reader.IsEmptyElement ) {
+                return null;
+            }
+
+            LdmlNode misc = null;
+            while ( reader.Read() ) {
+                var type = reader.NodeType;
+                if ( type == XmlNodeType.Element ) {
+                    if ( reader.Name == rootName ) {
+                        misc = Document.ReadNode( reader, this );
+                    } else {
+                        reader.SkipElement();
+                    }
+                } else if ( type == XmlNodeType.EndElement ) {
+                    break;
+                }
+            }
+
+            return misc;
+        }
     }
 }

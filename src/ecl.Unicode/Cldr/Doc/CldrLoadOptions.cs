@@ -8,7 +8,11 @@ namespace ecl.Unicode.Cldr.Doc {
         /// <summary>
         /// Load Rule-Based Number Formatting file
         /// </summary>
-        Rbnf=1,
+        Rbnf = 1,
 
+        /// <summary>
+        /// Load subdivisions
+        /// </summary>
+        Subdivision = 2
     }
 }

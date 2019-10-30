@@ -43,6 +43,11 @@ namespace ecl.Unicode.Cldr.Doc {
             }
             return info;
         }
+
+        //internal LanguageInfo FindLanguage( string code ) {
+        //    return FindLanguage( ref code );
+        //}
+
         internal LanguageInfo ResolveLanguage( string code ) {
             var info = FindLanguage( ref code );
             if ( info == null ) {
@@ -65,15 +70,22 @@ namespace ecl.Unicode.Cldr.Doc {
             }
         }
 
-        
+        public Currency FindCurrency( string code ) {
+            if ( _currencies.TryGetValue( code, out var value ) ) {
+                return value;
+            }
 
+            return null;
+        }
+
+        public IReadOnlyCollection<Currency> GetCurrencies() {
+            return _currencies.Values;
+        }
         private readonly Dictionary<string, Currency> _currencies = new Dictionary<string, Currency>( StringComparer.OrdinalIgnoreCase );
         
         private void Add( Currency currency ) {
             _currencies.Add( currency.Code, currency );
         }
-
-        private Dictionary<string, Currency> _depCurrencies;
 
         struct CalendarPreference {
             public string[] Territories;
@@ -106,14 +118,34 @@ namespace ecl.Unicode.Cldr.Doc {
             }
             List<TerContains> _terContains = new List<TerContains>();
 
+            private void LoadSubdivisionContainment( string elmName, List<AttributeValue> list ) {
+                if ( elmName != "subgroup" ) {
+                    return;
+                }
+                TerContains ter = new TerContains();
+                foreach ( AttributeValue value in list ) {
+                    switch ( value.Name ) {
+                    case "type":
+                        ter.Code = value.Value;
+                        break;
+                    case "contains":
+                        ter.contains = value.Value;
+                        break;
+                    default:
+                        _loader.Warning( "Invalid attribute " + value.Name );
+                        break;
+                    }
+                }
+                if ( ter.Code.HasValue() && ter.contains.HasValue() ) {
+                    ter.tp = TerritoryTypes.Subdivision;
+                    _terContains.Add( ter );
+                }
+            }
             private void LoadTerritoryContainment( string elmName, List<AttributeValue> list ) {
                 if ( elmName != "group" ) {
                     return;
                 }
                 TerContains ter = new TerContains();
-                TerritoryTypes tp = TerritoryTypes.Container;
-                string code = null;
-                string contains = null;
                 foreach ( AttributeValue value in list ) {
                     switch ( value.Name ) {
                     case "type":
@@ -355,6 +387,27 @@ namespace ecl.Unicode.Cldr.Doc {
                     }
                 }
             }
+
+            public void LoadSubdivisions(XmlReader reader) {
+                reader.MoveToContent();
+                while ( reader.Read() ) {
+                    var type = reader.NodeType;
+                    if ( type == XmlNodeType.Element ) {
+                        if ( !reader.IsEmptyElement ) {
+                            switch ( reader.Name ) {
+                            case "subdivisionContainment":
+                                reader.LoadNodes( LoadSubdivisionContainment );
+                                break;
+                            default:
+                                reader.SkipElement();
+                                break;
+                            }
+                        }
+                    } else if ( type == XmlNodeType.EndElement ) {
+                        break;
+                    }
+                }
+            }
             /// <summary>
             /// load supplemental Data
             /// </summary>
@@ -544,21 +597,14 @@ namespace ecl.Unicode.Cldr.Doc {
 
             private void CombineCurrencyFractions() {
                 var currencies = _loader._currencies;
-                var depCurrencies = _loader._depCurrencies;
 
                 foreach ( KeyValuePair<string, FractionInfo> pair in _fractionInfos ) {
                     Currency cur;
                     if ( !currencies.TryGetValue( pair.Key, out cur ) ) {
-                        if ( depCurrencies != null ) {
-                            if ( !depCurrencies.TryGetValue( pair.Key, out cur ) ) {
-                                //_loader.Warning( "Invalid Currency " + pair.Key );
-                                continue;
-                            }
-                        } else {
-                            //_loader.Warning( "Invalid Currency " + pair.Key );
-                            continue;
-                        }
+                        //_loader.Warning( "Invalid Currency " + pair.Key );
+                        continue;
                     }
+
                     cur.Digits = pair.Value.Digits;
                     cur.Rounding = pair.Value.Rounding;
                     cur.CashRounding = pair.Value.CashRounding;
@@ -569,7 +615,6 @@ namespace ecl.Unicode.Cldr.Doc {
             private void CombineCurrencyRegions() {
                 var territories = _loader._territories;
                 var currencies = _loader._currencies;
-                var depCurrencies = _loader._depCurrencies;
                 var curMap = new Dictionary<Currency, List<DateRangeValue<Territory>>>();
                 var list = new List<DateRangeValue<Currency>>();
 
@@ -581,22 +626,15 @@ namespace ecl.Unicode.Cldr.Doc {
                     }
                     list.Clear();
                     foreach ( DateRangeValue<string> range in region.Ranges ) {
-                        Currency cur;
-                        if ( !currencies.TryGetValue( range.Value, out cur ) ) {
-                            if ( depCurrencies != null ) {
-                                if ( !depCurrencies.TryGetValue( range.Value, out cur ) ) {
-                                    cur = new Currency {
-                                        Code = range.Value,
-                                        Deprecated = true
-                                    };
-                                    depCurrencies.Add( cur.Code, cur );
-                                    Debug.WriteLine( "Currency added:" + range.Value );
-                                }
-                            } else {
-                                continue;
-                            }
-                            
+                        if ( !currencies.TryGetValue( range.Value, out Currency cur ) ) {
+                            cur = new Currency {
+                                Code = range.Value,
+                                Deprecated = true
+                            };
+                            currencies.Add( cur.Code, cur );
+                            //Debug.WriteLine( "Currency added:" + range.Value );
                         }
+
                         list.Add( new DateRangeValue<Currency>() {
                             From = range.From,
                             To = range.To,

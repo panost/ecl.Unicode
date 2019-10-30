@@ -1,32 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
 using ecl.Unicode.Cldr.Doc;
+using ecl.Unicode.Cldr.Locale;
 
 namespace ecl.Unicode.Cldr {
     public class Currency : CodeObjectBase {
-        private string _name;
-        /// <summary>
-        /// 
-        /// </summary>
-        public string Name {
-            get {
-                return _name;
-            }
-            set {
-                _name = value;
-            }
-        }
 
         /// <summary>
         /// 
         /// </summary>
         public string Code {
-            get {
-                return _code;
-            }
-            set {
-                _code = value;
-            }
+            get => _code;
+            set => _code = value;
         }
 
         private short _id;
@@ -34,16 +19,33 @@ namespace ecl.Unicode.Cldr {
         /// 
         /// </summary>
         public short Id {
-            get {
-                return _id;
-            }
-            set {
-                _id = value;
-            }
+            get => _id;
+            set => _id = value;
         }
 
+        internal LocaleCurrency GetLocale( CldrLocale locale ) {
+            if ( locale.GetNumberInfo().Currencies.Nodes.TryGetValue( this, out LocaleCurrency e ) ) {
+                return e;
+            }
+            return null;
+        }
+        public string GetName( CldrLocale locale ) {
+            var curr = GetLocale( locale );
+            if ( curr != null ) {
+                return curr.Select( "displayName" ).GetText();
+            }
+
+            return null;
+        }
+        public string GetSymbol( CldrLocale locale ) {
+            var curr = GetLocale( locale );
+            if ( curr != null ) {
+                return curr.Select( "symbol" ).GetText();
+            }
+
+            return null;
+        }
         public Currency() {
-            
         }
 
         internal Currency( List<AttributeValue> list ) {

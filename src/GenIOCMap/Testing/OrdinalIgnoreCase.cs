@@ -91,13 +91,13 @@ namespace GenIOCMap {
             return lengthA - lengthB;
         }
 
-        public unsafe static int Compare( string left, string right ) {
+        public static unsafe int Compare( string left, string right ) {
             fixed ( char* a = left )
             fixed ( char* b = right )
                 return CaseInsensitiveCompare( a, b, left.Length, right.Length );
         }
 
-        public unsafe static bool EqualsTo( string x, string y ) {
+        public static unsafe bool EqualsTo( string x, string y ) {
             if ( ReferenceEquals( x, y ) )
                 return true;
             if ( x == null )
@@ -114,11 +114,19 @@ namespace GenIOCMap {
             }
         }
 
-        public unsafe static int GetHashCode( string str ) {
+        public static unsafe int GetHashCode( string str ) {
             if (str==null)
                 return CaseInsensitiveSeed;
             fixed ( char* a = str ) {
                 return GetCaseInsensitiveHashCode( a, str.Length );
+            }
+        }
+
+        public static void TestMaps() {
+            for ( int i = 0; i <= char.MaxValue; i++ ) {
+                if ( ToUpper( (char)i ) != ToUpper2( (char)i ) ) {
+                    throw new ApplicationException();
+                }
             }
         }
     }

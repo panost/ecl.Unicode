@@ -26,7 +26,7 @@ namespace GenIOCMap.Testing {
                 int hcLower = StringComparer.OrdinalIgnoreCase.GetHashCode( lower );
 
                 if ( !eq && cmp != 0 && hcUpper == hcLower ) {
-                    Console.WriteLine($"U+{FirstUpper + i:X6}, U+{FirstLower + i:X6}' HashCode = {hcUpper}");
+                    Console.WriteLine($"U+{FirstUpper + i:X6} and U+{FirstLower + i:X6}' HashCode = {hcUpper}");
                 } else {
                     throw new NotImplementedException("Unreached");
                 }

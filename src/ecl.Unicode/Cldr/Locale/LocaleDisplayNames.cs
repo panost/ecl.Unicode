@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Xml;
 using ecl.Unicode.Cldr.Doc;
 
 namespace ecl.Unicode.Cldr.Locale {
     public class LocaleDisplayNamesNode : LdmlNoKeyNode {
         internal override LdmlNode CreateChildNode( string name ) {
             switch ( name ) {
+            case "subdivisions":
             case "territories":
                 return new TerritoriesNode();
             case "languages":
@@ -42,7 +44,15 @@ namespace ecl.Unicode.Cldr.Locale {
                 return null;
             }
         }
-
+        public Dictionary<Territory, string> SubdivisionNames {
+            get {
+                TerritoriesNode node = this.Select( "subdivisions" ) as TerritoriesNode;
+                if ( node != null ) {
+                    return node.TerritoryNames;
+                }
+                return null;
+            }
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -55,5 +65,8 @@ namespace ecl.Unicode.Cldr.Locale {
                 return null;
             }
         }
+
+        
+
     }
 }

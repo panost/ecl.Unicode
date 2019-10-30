@@ -58,7 +58,7 @@ namespace GenIOCMap {
             }
         }
 
-        public void Write( TextWriter writer ) {
+        private List<MiddleMap> Calc(out List<HighMap> hiList) {
             List<MiddleMap> list = new List<MiddleMap>();
 
             for ( int i = 0; i < _allMiddle.Length; i++ ) {
@@ -81,7 +81,7 @@ namespace GenIOCMap {
                 }
             }
 
-            List<HighMap> hiList = new List<HighMap>();
+            hiList = new List<HighMap>();
             for ( int i = 0; i < _highMap.Length; i++ ) {
                 var high = _highMap[ i ];
                 if ( high.Index < 0 ) {
@@ -96,6 +96,33 @@ namespace GenIOCMap {
                 }
             }
 
+            return list;
+        }
+        public void Save( BinaryWriter writer ) {
+            List<MiddleMap> list = Calc( out List<HighMap> hiList );
+
+            writer.Write( (ushort)hiList.Count );
+            writer.Write( (ushort)list.Count );
+            for ( int i = 0; i < _highMap.Length; i++ ) {
+                writer.Write( (ushort)( _highMap[ i ].Index * 16 ) );
+            }
+            for ( int i = 0; i < hiList.Count; i++ ) {
+                var mid = hiList[ i ].Map;
+                for ( int j = 0; j < 16; j++ ) {
+                    writer.Write( (ushort)( mid[ j ].Index * 16 ) );
+                }
+            }
+            for ( int i = 0; i < list.Count; i++ ) {
+                var mid = list[ i ].Map;
+                for ( int j = 0; j < 16; j++ ) {
+                    writer.Write( (ushort)mid[ j ] );
+                }
+            }
+        }
+
+        public void Write( TextWriter writer ) {
+
+            List<MiddleMap> list = Calc( out List<HighMap> hiList );
             writer.WriteLine( "static CharMapper _map = new CharMapper( new byte[256] {" );
             for ( int i = 0; i < _highMap.Length; i++ ) {
                 if ( i > 0 ) {

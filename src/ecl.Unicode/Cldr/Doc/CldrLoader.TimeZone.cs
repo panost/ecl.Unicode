@@ -16,13 +16,12 @@ namespace ecl.Unicode.Cldr.Doc {
             }
         }
         private readonly Dictionary<string, TimeZoneType> _timeZoneGmtMap = new Dictionary<string, TimeZoneType>( StringComparer.OrdinalIgnoreCase );
-        Dictionary<string, MetaTimeZone> _metaZones = new Dictionary<string, MetaTimeZone>( StringComparer.OrdinalIgnoreCase );
-        Dictionary<string, WindowTimeZone> _windowZones = new Dictionary<string, WindowTimeZone>( StringComparer.OrdinalIgnoreCase );
+        private readonly Dictionary<string, MetaTimeZone> _metaZones = new Dictionary<string, MetaTimeZone>( StringComparer.OrdinalIgnoreCase );
+        private readonly Dictionary<string, WindowTimeZone> _windowZones = new Dictionary<string, WindowTimeZone>( StringComparer.OrdinalIgnoreCase );
 
         public TimeZoneType FindZone(string name) {
-            TimeZoneType zone;
             EnsureTimeZonesLoaded();
-            if( !_timeZoneInfoMap.TryGetValue( name, out zone ) ) {
+            if( !_timeZoneInfoMap.TryGetValue( name, out TimeZoneType zone ) ) {
                 const string GmtPrefix = "Etc/GMT";
                 if ( name.StartsWith( GmtPrefix, StringComparison.OrdinalIgnoreCase ) ) {
                     zone = _timeZoneGmtMap.GetOrCreate( name );

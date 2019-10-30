@@ -26,10 +26,8 @@ namespace ecl.Unicode.Cldr.Locale {
             var all = loader._territories;
             var map = new Dictionary<Territory, string>();
             foreach ( LdmlNode node in Children ) {
-                LdmlAnyNode elm = node as LdmlAnyNode;
-                if ( elm != null && elm.Name == "territory" ) {
-                    Territory ter;
-                    if ( !all.TryGetValue( elm.KeyValue, out ter ) ) {
+                if ( node is LdmlAnyNode elm && elm.Name == "territory" ) {
+                    if ( !all.TryGetValue( elm.KeyValue, out Territory ter ) ) {
                         loader.Warning( "Unable to find territory " + elm.KeyValue );
                         continue;
                     }

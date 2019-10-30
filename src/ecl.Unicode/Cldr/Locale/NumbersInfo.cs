@@ -16,8 +16,14 @@ namespace ecl.Unicode.Cldr.Locale {
             }
         }
 
+        public NumberCurrenciesNode Currencies => (NumberCurrenciesNode)this.Select( "currencies" );
+
         internal override LdmlNode CreateChildNode( string name ) {
             switch ( name ) {
+            case "defaultNumberingSystem":
+            case "otherNumberingSystems":
+            case "minimumGroupingDigits":
+                break;
             case "symbols":
                 return new NumberSymbolsNode();
             case "currencyFormats":
@@ -29,6 +35,9 @@ namespace ecl.Unicode.Cldr.Locale {
             case "scientificFormats":
                 return new NumberFormatsNode( NumberType.Scientific );
             case "currencies":
+                return new NumberCurrenciesNode();
+            case "miscPatterns":
+            case "minimalPairs":
                 break;
             }
             return base.CreateChildNode( name );

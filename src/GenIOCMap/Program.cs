@@ -24,7 +24,8 @@ namespace GenIOCMap {
             //new TestCompEq(Ucd).TestCompare();
             //new TestCompEq(Ucd).TestEquals();
             //new HashCodeTest( Ucd ).TestHashCode();
-            new Deseret().Show();
+            //new Deseret().Show();
+            OrdinalIgnoreCase.TestMaps();
         }
     }
 }

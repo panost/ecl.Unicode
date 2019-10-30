@@ -14,6 +14,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="OrdinalIgnoreCase.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="OrdinalIgnoreCase.bin" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ecl.Unicode\ecl.Unicode.csproj" />
   </ItemGroup>
 

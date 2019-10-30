@@ -44,6 +44,23 @@ namespace GenIOCMap.Testing {
             }
         }
 
+        public void TestMaps() {
+            for ( int i = 0; i < _allStrings.Length; i++ ) {
+                if ( ( i & 0xff ) == 0 ) {
+                    Debug.WriteLine( $"{i:X6} {i*100.0/_allStrings.Length}%" );
+                }
+                string left = _allStrings[ i ];
+                for ( int j = i+1; j < _allStrings.Length; j++ ) {
+                    string right = _allStrings[ j ];
+
+                    int cmp = string.Compare( left, right, StringComparison.OrdinalIgnoreCase );
+                    int cmp2 = OrdinalIgnoreCase.Compare( left, right );
+                    if ( Math.Sign( cmp )!=Math.Sign( cmp2 )) {
+                        Console.WriteLine( "asd" );
+                    }
+                }
+            }
+        }
         public void TestEquals() {
             for ( int i = 0; i < _allStrings.Length; i++ ) {
                 if ( ( i & 0xff ) == 0 ) {

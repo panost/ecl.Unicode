@@ -10,10 +10,14 @@ namespace ecl.Unicode.Cldr {
         Group = 1,
         Container = 2,
         Deprecated = 4,
+
         //Code = 8,
         MetaGroup = 16,
-        Obsolete = 32
-    };
+        Obsolete = 32,
+
+        Subdivision = 64
+    }
+
     [System.Diagnostics.DebuggerDisplay( "Code = {_code}, {GetDebugHint()}" )]
     public class Territory : CodeObjectBase {
         private short _id;

@@ -6,13 +6,11 @@ using ecl.Unicode.Cldr.Doc;
 
 namespace ecl.Unicode.Cldr {
     public class TimeZoneType : NamedObject {
-        private List<DateRangeValue<MetaTimeZone>> _uses = new List<DateRangeValue<MetaTimeZone>>();
+        private readonly List<DateRangeValue<MetaTimeZone>> _uses = new List<DateRangeValue<MetaTimeZone>>();
         /// <summary>
         /// 
         /// </summary>
-        public List<DateRangeValue<MetaTimeZone>> Uses {
-            get { return _uses; }
-        }
+        public List<DateRangeValue<MetaTimeZone>> Uses => _uses;
 
         public TimeZoneType() {
         }

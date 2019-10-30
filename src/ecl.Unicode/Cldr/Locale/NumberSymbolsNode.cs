@@ -6,112 +6,61 @@ namespace ecl.Unicode.Cldr.Locale {
         /// <summary>
         /// 
         /// </summary>
-        public string Decimal {
-            get {
-                return this.Select( "decimal" ).GetText();
-            }
-        }
+        public string Decimal => this.Select( "decimal" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string Group {
-            get {
-                return this.Select( "group" ).GetText();
-            }
-        }
+        public string Group => this.Select( "group" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string List {
-            get {
-                return this.Select( "list" ).GetText();
-            }
-        }
+        public string List => this.Select( "list" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string PercentSign {
-            get {
-                return this.Select( "percentSign" ).GetText();
-            }
-        }
+        public string PercentSign => this.Select( "percentSign" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string PlusSign {
-            get {
-                return this.Select( "plusSign" ).GetText();
-            }
-        }
+        public string PlusSign => this.Select( "plusSign" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string MinusSign {
-            get {
-                return this.Select( "minusSign" ).GetText();
-            }
-        }
+        public string MinusSign => this.Select( "minusSign" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string Exponential {
-            get {
-                return this.Select( "exponential" ).GetText();
-            }
-        }
+        public string Exponential => this.Select( "exponential" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string SuperscriptingExponent {
-            get {
-                return this.Select( "superscriptingExponent" ).GetText();
-            }
-        }
+        public string SuperscriptingExponent => this.Select( "superscriptingExponent" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string PerMille {
-            get {
-                return this.Select( "perMille" ).GetText();
-            }
-        }
+        public string PerMille => this.Select( "perMille" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string Infinity {
-            get {
-                return this.Select( "infinity" ).GetText();
-            }
-        }
+        public string Infinity => this.Select( "infinity" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string Nan {
-            get {
-                return this.Select( "nan" ).GetText();
-            }
-        }
+        public string Nan => this.Select( "nan" ).GetText();
 
         /// <summary>
         /// 
         /// </summary>
-        public string TimeSeparator {
-            get {
-                return this.Select( "timeSeparator" ).GetText();
-            }
-        }
-
-
-        
+        public string TimeSeparator => this.Select( "timeSeparator" ).GetText();
     }
 }

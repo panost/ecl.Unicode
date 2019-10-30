@@ -22,7 +22,7 @@ namespace GenIOCMap {
             }
 
         }
-        public void BuildToUpperMap() {
+        public void BuildToUpperMap(bool text=false) {
             var map = new InterleaveMap();
 
             foreach ( KeyValuePair<int, int> pair in _iocMap ) {
@@ -44,8 +44,16 @@ namespace GenIOCMap {
                     }
                 }
             }
-            using ( var w = File.CreateText( @"../../bin/OrdinalIgnoreCaseMap.cs" ) ) {
-                map.Write(w);
+
+            if ( text ) {
+                using ( var w = File.CreateText( @"../../bin/OrdinalIgnoreCaseMap.cs" ) ) {
+                    map.Write( w );
+                }
+            } else {
+                using(var w=File.Create( @"../../bin/OrdinalIgnoreCaseMap.bin" ))
+                using ( var b = new BinaryWriter( w ) ) {
+                    map.Save( b );
+                }
             }
 
         }

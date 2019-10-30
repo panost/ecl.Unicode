@@ -160,22 +160,22 @@ namespace ecl.Unicode.Cldr.Doc {
                 reader.MoveToElement();
             }
         }
-        internal static List<T> LoadList<T>( this XmlReader reader ) where T : SimpleNode, new() {
-            var list = new List<T>();
-            while ( reader.Read() ) {
-                switch ( reader.NodeType ) {
-                case XmlNodeType.Element:
-                    T elm = new T();
-                    LoadNode( reader, elm );
-                    list.Add( elm );
-                    SkipElement( reader );
-                    break;
-                case XmlNodeType.EndElement:
-                    return list;
-                }
-            }
-            return null;
-        }
+        //internal static List<T> LoadList<T>( this XmlReader reader ) where T : SimpleNode, new() {
+        //    var list = new List<T>();
+        //    while ( reader.Read() ) {
+        //        switch ( reader.NodeType ) {
+        //        case XmlNodeType.Element:
+        //            T elm = new T();
+        //            LoadNode( reader, elm );
+        //            list.Add( elm );
+        //            SkipElement( reader );
+        //            break;
+        //        case XmlNodeType.EndElement:
+        //            return list;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         internal static void LoadElements( this XmlReader reader, Func<XmlReader,bool> elmReader ) {
             while( reader.Read() ) {
@@ -216,25 +216,25 @@ namespace ecl.Unicode.Cldr.Doc {
             return false;
         }
 
-        internal static void LoadNodes<T>( this XmlReader reader, T obj, 
-            Action<T,string, List<AttributeValue>> nodeAction, string nodeName = null ) {
-            var list = new List<AttributeValue>();
-            while( reader.Read() ) {
-                switch( reader.NodeType ) {
-                case XmlNodeType.Element:
-                    string elmName = reader.Name;
-                    if ( nodeName == null || nodeName == elmName ) {
-                        list.Clear();
-                        reader.AddAttributes( list );
-                        nodeAction( obj, elmName, list );
-                    }
-                    SkipElement( reader );
-                    break;
-                case XmlNodeType.EndElement:
-                    return;
-                }
-            }
-        }
+        //internal static void LoadNodes<T>( this XmlReader reader, T obj, 
+        //    Action<T,string, List<AttributeValue>> nodeAction, string nodeName = null ) {
+        //    var list = new List<AttributeValue>();
+        //    while( reader.Read() ) {
+        //        switch( reader.NodeType ) {
+        //        case XmlNodeType.Element:
+        //            string elmName = reader.Name;
+        //            if ( nodeName == null || nodeName == elmName ) {
+        //                list.Clear();
+        //                reader.AddAttributes( list );
+        //                nodeAction( obj, elmName, list );
+        //            }
+        //            SkipElement( reader );
+        //            break;
+        //        case XmlNodeType.EndElement:
+        //            return;
+        //        }
+        //    }
+        //}
 
         internal static void LoadNodes( this XmlReader reader, Action<string, List<AttributeValue>> nodeAction ) {
             var list = new List<AttributeValue>();
