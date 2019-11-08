@@ -48,11 +48,12 @@ namespace ecl.Unicode.Cldr.Doc {
                 localeInfo = GetLocaleInfo( localeName );
             }
             LanguageInfo parentInfo = localeInfo.Parent;
+            string parentName = localeName;
             while ( parentInfo == null ) {
-                int idx = localeName.LastIndexOf( '_' );
+                int idx = parentName.LastIndexOf( '_' );
                 if ( idx > 0 ) {
-                    localeName = localeName.Substring( 0, idx );
-                    parentInfo = FindLanguage( ref localeName );
+                    parentName = localeName.Substring( 0, idx );
+                    parentInfo = FindLanguage( ref parentName );
                 } else {
                     break;
                 }
