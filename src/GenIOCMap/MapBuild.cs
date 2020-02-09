@@ -30,7 +30,7 @@ namespace GenIOCMap {
                      key != pair.Key ) {
                     Console.WriteLine( "{0:X6} != {1:X6}", key, pair.Key );
                 } else {
-                    var left = _loader[ pair.Key ];
+                    UnicodeEntry left = _loader[ pair.Key ];
                     //var right = _loader[ pair.Value ];
                     if ( left.Uppercase != 0 ) {
                         if ( left.Uppercase != pair.Value ) {

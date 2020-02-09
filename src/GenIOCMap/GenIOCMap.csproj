@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -15,10 +15,14 @@
 
   <ItemGroup>
     <None Remove="OrdinalIgnoreCase.bin" />
+    <None Remove="Scanner.bin" />
+    <None Remove="Scanner2.bin" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="OrdinalIgnoreCase.bin" />
+    <EmbeddedResource Include="Scanner.bin" />
+    <EmbeddedResource Include="Scanner2.bin" />
   </ItemGroup>
 
   <ItemGroup>

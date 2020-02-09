@@ -1,6 +1,9 @@
 //
 // Generated file. Do not edit manually.
-// Generator : F:\DevWork\Core\CodeGen\ReposGen\UcdScripts\UcdScriptGen.cs
+// Generator : F:\Dev\Core\CodeGen\CldrGen\UcdScripts\UcdScriptGen.cs
+//
+// ReSharper disable IdentifierTypo
+// ReSharper disable CommentTypo
 //
 namespace ecl.Unicode {
 	/// <summary>
@@ -82,7 +85,7 @@ namespace ecl.Unicode {
 		Batak = 365,
 		
 		/// <summary>
-		/// Bengali
+		/// Bengali (Bangla)
 		/// <para>'Beng'</para>
 		/// </summary>
 		Bengali = 325,
@@ -172,6 +175,12 @@ namespace ecl.Unicode {
 		Cherokee = 445,
 		
 		/// <summary>
+		/// Chorasmian
+		/// <para>'Chrs'</para>
+		/// </summary>
+		Chorasmian = 109,
+		
+		/// <summary>
 		/// Cirth
 		/// <para>'Cirt'</para>
 		/// </summary>
@@ -197,10 +206,16 @@ namespace ecl.Unicode {
 		Cuneiform = 20,
 		
 		/// <summary>
-		/// Cypriot
+		/// Cypriot syllabary
 		/// <para>'Cprt'</para>
 		/// </summary>
 		Cypriot = 403,
+		
+		/// <summary>
+		/// Cypro-Minoan
+		/// <para>'Cpmn'</para>
+		/// </summary>
+		CyproMinoan = 402,
 		
 		/// <summary>
 		/// Cyrillic
@@ -225,6 +240,18 @@ namespace ecl.Unicode {
 		/// <para>'Deva'</para>
 		/// </summary>
 		Devanagari = 315,
+		
+		/// <summary>
+		/// Dives Akuru
+		/// <para>'Diak'</para>
+		/// </summary>
+		DivesAkuru = 342,
+		
+		/// <summary>
+		/// Dogra
+		/// <para>'Dogr'</para>
+		/// </summary>
+		Dogra = 328,
 		
 		/// <summary>
 		/// Duployan shorthand, Duployan stenography
@@ -257,6 +284,12 @@ namespace ecl.Unicode {
 		Elbasan = 226,
 		
 		/// <summary>
+		/// Elymaic
+		/// <para>'Elym'</para>
+		/// </summary>
+		Elymaic = 128,
+		
+		/// <summary>
 		/// Symbols (Emoji variant)
 		/// <para>'Zsye'</para>
 		/// </summary>
@@ -269,7 +302,7 @@ namespace ecl.Unicode {
 		Ethiopic = 430,
 		
 		/// <summary>
-		/// Georgian (Mkhedruli)
+		/// Georgian (Mkhedruli and Mtavruli)
 		/// <para>'Geor'</para>
 		/// </summary>
 		Georgian = 240,
@@ -303,6 +336,12 @@ namespace ecl.Unicode {
 		/// <para>'Gujr'</para>
 		/// </summary>
 		Gujarati = 320,
+		
+		/// <summary>
+		/// Gunjala Gondi
+		/// <para>'Gong'</para>
+		/// </summary>
+		GunjalaGondi = 312,
 		
 		/// <summary>
 		/// Gurmukhi
@@ -339,6 +378,12 @@ namespace ecl.Unicode {
 		/// <para>'Jpan'</para>
 		/// </summary>
 		HanHiraganaKatakana = 413,
+		
+		/// <summary>
+		/// Hanifi Rohingya
+		/// <para>'Rohg'</para>
+		/// </summary>
+		HanifiRohingya = 167,
 		
 		/// <summary>
 		/// Han (Simplified variant)
@@ -594,6 +639,12 @@ namespace ecl.Unicode {
 		Mahajani = 314,
 		
 		/// <summary>
+		/// Makasar
+		/// <para>'Maka'</para>
+		/// </summary>
+		Makasar = 366,
+		
+		/// <summary>
 		/// Malayalam
 		/// <para>'Mlym'</para>
 		/// </summary>
@@ -618,6 +669,12 @@ namespace ecl.Unicode {
 		Marchen = 332,
 		
 		/// <summary>
+		/// Masaram Gondi
+		/// <para>'Gonm'</para>
+		/// </summary>
+		MasaramGondi = 313,
+		
+		/// <summary>
 		/// Mathematical notation
 		/// <para>'Zmth'</para>
 		/// </summary>
@@ -628,6 +685,12 @@ namespace ecl.Unicode {
 		/// <para>'Maya'</para>
 		/// </summary>
 		MayanHieroglyphs = 90,
+		
+		/// <summary>
+		/// Medefaidrin (Oberi Okaime, Oberi Ɔkaimɛ)
+		/// <para>'Medf'</para>
+		/// </summary>
+		MedefaidrinOberiOkaimeOberiƆkaimɛ = 265,
 		
 		/// <summary>
 		/// Meitei Mayek (Meithei, Meetei)
@@ -681,7 +744,7 @@ namespace ecl.Unicode {
 		/// Mro, Mru
 		/// <para>'Mroo'</para>
 		/// </summary>
-		Mro = 199,
+		Mro = 264,
 		
 		/// <summary>
 		/// Multani
@@ -702,10 +765,22 @@ namespace ecl.Unicode {
 		Nabataean = 159,
 		
 		/// <summary>
-		/// Nakhi Geba ('Na-'Khi ²Ggŏ-¹baw, Naxi Geba)
+		/// Naxi Geba (na²¹ɕi³³ gʌ²¹ba²¹, 'Na-'Khi ²Ggŏ-¹baw, Nakhi Geba)
 		/// <para>'Nkgb'</para>
 		/// </summary>
 		NakhiGeba = 420,
+		
+		/// <summary>
+		/// Nandinagari
+		/// <para>'Nand'</para>
+		/// </summary>
+		Nandinagari = 311,
+		
+		/// <summary>
+		/// Naxi Dongba (na²¹ɕi³³ to³³ba²¹, Nakhi Tomba)
+		/// <para>'Nkdb'</para>
+		/// </summary>
+		NaxiDongbaNaɕiToBaNakhiTomba = 85,
 		
 		/// <summary>
 		/// Newa, Newar, Newari, Nepāla lipi
@@ -730,6 +805,12 @@ namespace ecl.Unicode {
 		/// <para>'Nshu'</para>
 		/// </summary>
 		Nushu = 499,
+		
+		/// <summary>
+		/// Nyiakeng Puachue Hmong
+		/// <para>'Hmnp'</para>
+		/// </summary>
+		NyiakengPuachueHmong = 451,
 		
 		/// <summary>
 		/// Ogham
@@ -774,6 +855,12 @@ namespace ecl.Unicode {
 		OldPersian = 30,
 		
 		/// <summary>
+		/// Old Sogdian
+		/// <para>'Sogo'</para>
+		/// </summary>
+		OldSogdian = 142,
+		
+		/// <summary>
 		/// Old South Arabian
 		/// <para>'Sarb'</para>
 		/// </summary>
@@ -786,7 +873,7 @@ namespace ecl.Unicode {
 		OldTurkic = 175,
 		
 		/// <summary>
-		/// Oriya
+		/// Oriya (Odia)
 		/// <para>'Orya'</para>
 		/// </summary>
 		Oriya = 327,
@@ -900,6 +987,12 @@ namespace ecl.Unicode {
 		Shavian = 281,
 		
 		/// <summary>
+		/// Shuishu
+		/// <para>'Shui'</para>
+		/// </summary>
+		Shuishu = 530,
+		
+		/// <summary>
 		/// Siddham, Siddhaṃ, Siddhamātṛkā
 		/// <para>'Sidd'</para>
 		/// </summary>
@@ -918,10 +1011,22 @@ namespace ecl.Unicode {
 		Sinhala = 348,
 		
 		/// <summary>
+		/// Sogdian
+		/// <para>'Sogd'</para>
+		/// </summary>
+		Sogdian = 141,
+		
+		/// <summary>
 		/// Sora Sompeng
 		/// <para>'Sora'</para>
 		/// </summary>
 		SoraSompeng = 398,
+		
+		/// <summary>
+		/// Soyombo
+		/// <para>'Soyo'</para>
+		/// </summary>
+		Soyombo = 329,
 		
 		/// <summary>
 		/// Sundanese
@@ -1086,6 +1191,12 @@ namespace ecl.Unicode {
 		VisibleSpeech = 280,
 		
 		/// <summary>
+		/// Wancho
+		/// <para>'Wcho'</para>
+		/// </summary>
+		Wancho = 283,
+		
+		/// <summary>
 		/// Warang Citi (Varang Kshiti)
 		/// <para>'Wara'</para>
 		/// </summary>
@@ -1098,9 +1209,21 @@ namespace ecl.Unicode {
 		Woleai = 480,
 		
 		/// <summary>
+		/// Yezidi
+		/// <para>'Yezi'</para>
+		/// </summary>
+		Yezidi = 192,
+		
+		/// <summary>
 		/// Yi
 		/// <para>'Yiii'</para>
 		/// </summary>
-		Yi = 460
+		Yi = 460,
+		
+		/// <summary>
+		/// Zanabazar Square (Zanabazarin Dörböljin Useg, Xewtee Dörböljin Bicig, Horizontal Square Script)
+		/// <para>'Zanb'</para>
+		/// </summary>
+		ZanabazarSquare = 339
 	}
 }

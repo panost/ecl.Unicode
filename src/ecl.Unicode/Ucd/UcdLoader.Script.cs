@@ -25,6 +25,17 @@ namespace ecl.Unicode.Ucd {
             }
             return true;
         }
+        private IEnumerable<EnumRange<T>> GetRanges<T>( LineReader reader, Func<string,T> parse ) {
+            List<string> segs = new List<string>();
+            foreach( var count in reader.GetLines( segs, 2 ) ) {
+                int begin;
+                int end;
+                if( TryParseCodeRange( segs[ 0 ], out begin, out end ) ) {
+                    yield return new EnumRange<T>( begin, end, parse( segs[ 1 ] ) );
+                }
+            }
+        }
+
         private IEnumerable<NamedRange> GetNamedRanges( LineReader reader ) {
                 List<string> segs = new List<string>();
             foreach( var count in reader.GetLines( segs, 2 ) ) {
@@ -59,7 +70,7 @@ namespace ecl.Unicode.Ucd {
                     line = segs[ 1 ];
                     WritingScript script;
                     commons.Clear();
-                    if ( !_scripts.TryGetValue( line, out script ) ) {
+                    if ( !_scripts.TryGetValue( line, out script ) && !Enum.TryParse( line, true, out script )) {
                         if ( standard || line.IndexOf( ' ' ) < 0 ) {
                             _owner.Error( $"Unable to find script '{line}'" );
                         } else {
@@ -115,7 +126,6 @@ namespace ecl.Unicode.Ucd {
                     }
                 }
             }
-
         }
 
         class ScriptCodeLoaded : ScriptLoaderBase {
@@ -180,7 +190,9 @@ namespace ecl.Unicode.Ucd {
         
 
         public void LoadScripts() {
-            ScriptLoader ldr = new ScriptLoader( this );
+            //ScriptLoader ldr = new ScriptLoader( this );
+            EnsureDataLoaded();
+            var ldr = new ScriptCodeLoaded( this );
             using ( LineReader reader = OpenLineReader( "Scripts.txt" ) ) {
                 ldr.LoadScripts( reader, true );
             }

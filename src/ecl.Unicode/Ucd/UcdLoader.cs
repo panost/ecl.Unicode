@@ -30,6 +30,14 @@ namespace ecl.Unicode.Ucd {
             }
         }
 
+        internal LineReader OpenLineReader( string folder, string name, TextReaderOptions options = 0 ) {
+            Stream s = _fileLoader.OpenFile( folder, name );
+            if( s != null ) {
+                return new LineReader( s, options );
+            }
+            Error( "Unable to find file '{0}'", name );
+            return null;
+        }
 
         internal LineReader OpenLineReader( string name, TextReaderOptions options = 0 ) {
             Stream s = _fileLoader.OpenFile( name );
@@ -115,6 +123,35 @@ namespace ecl.Unicode.Ucd {
                 }
                 return _blocks;
             }
+        }
+
+        public EnumRange<WordBreak>[] LoadWordBreak() {
+            var list = new List<EnumRange<WordBreak>>();
+            using( LineReader reader = OpenLineReader( "auxiliary", "WordBreakProperty.txt" ) ) {
+                foreach( var range in GetRanges( reader, Util.ParseWordBreak ) ) {
+                    list.Add( range );
+                }
+            }
+            return list.ToArray();
+        }
+        public EnumRange<SentenceBreak>[] LoadSentenceBreak() {
+            var list = new List<EnumRange<SentenceBreak>>();
+            using( LineReader reader = OpenLineReader( "auxiliary", "SentenceBreakProperty.txt" ) ) {
+                foreach( var range in GetRanges( reader, Util.ParseSentenceBreak ) ) {
+                    list.Add( range );
+                }
+            }
+            return list.ToArray();
+        }
+
+        public EnumRange<GraphemeClusterBreak>[] LoadGraphemeBreak() {
+            var list = new List<EnumRange<GraphemeClusterBreak>>();
+            using( LineReader reader = OpenLineReader( "auxiliary", "GraphemeBreakProperty.txt" ) ) {
+                foreach( var range in GetRanges( reader, Util.ParseGraphemeClusterBreak ) ) {
+                    list.Add( range );
+                }
+            }
+            return list.ToArray();
         }
 
         private UcdBlock[] LoadBlocks() {

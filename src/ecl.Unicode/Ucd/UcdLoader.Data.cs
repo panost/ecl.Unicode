@@ -59,7 +59,8 @@ namespace ecl.Unicode.Ucd {
             /// <summary>
             /// Don'Load entries above 0x052F
             /// </summary>
-            EuropeOnly = 256
+            EuropeOnly = 256,
+
         };
         private static readonly char[] _spaceDelims = { ' ' };
 
@@ -132,6 +133,10 @@ namespace ecl.Unicode.Ucd {
             public void Load( LineReader reader ) {
                 Dictionary<int, string> alternativeNames = _owner.AlternativeNames;
                 List<string> segs = new List<string>();
+                int firstRange = 0;
+                int lastRange = 0;
+                const string FirstRange = ", First>";
+                const string LastRange = ", Last>";
                 foreach ( var count in reader.GetLines(segs,15) ) {
                     if( count != 15 ) {
                         continue;
@@ -153,8 +158,22 @@ namespace ecl.Unicode.Ucd {
                         name = dscr;
                     } else {
                         dscr = name;
-                        if( dscr.SameName( "<control>" ) ) {
-                            dscr = segs[ 10 ];
+                        if ( name.HasValue() ) {
+                            if ( name[ 0 ] == '<' ) {
+                                if( name.SameName( "<control>" ) ) {
+                                    dscr = segs[ 10 ];
+                                } else if ( name.EndsWith( FirstRange, StringComparison.OrdinalIgnoreCase ) ) {
+                                    firstRange = _entry.CodeValue;
+                                    name = name.Substring( 1, name.Length - 1 - FirstRange.Length );
+                                    dscr = null;
+                                } else if ( name.EndsWith( LastRange, StringComparison.OrdinalIgnoreCase ) ) {
+                                    name = name.Substring( 1, name.Length - 1 - LastRange.Length );
+                                    dscr = null;
+                                    lastRange = _entry.CodeValue;
+                                } else {
+                                    Debug.WriteLine( "Asd:" + name );
+                                }
+                            }
                         }
                     }
                     
@@ -163,7 +182,7 @@ namespace ecl.Unicode.Ucd {
                             _entry.EnumName = Util.GenEnumName( dscr );
                         }
                     } else if ( !alternativeNames.TryGetValue( _entry.CodeValue, out dscr ) ) {
-                        Debug.WriteLine( "NO NAME " + _entry.CodeValue.ToString( "X4" ) + " " + segs[ 11 ] );
+                        //Debug.WriteLine( "NO NAME " + _entry.CodeValue.ToString( "X4" ) + " " + segs[ 11 ] );
                     }
                     _entry.Name = name;
                     if ( !_charTypes.TryGetValue( segs[ 2 ], out _entry.Category ) ) {
@@ -245,6 +264,15 @@ namespace ecl.Unicode.Ucd {
                         if ( !TryParseHex( segs[ 14 ], out _entry.TitleCase ) ) {
                             Error( "Invlaid code point '{0}'", segs[ 14 ] );
                         }
+                    }
+                    if ( lastRange > 0 ) {
+                        _entry.CodeValue = firstRange + 1;
+                        while ( _entry.CodeValue < lastRange ) {
+                            Add( _entry );
+                            _entry.CodeValue++;
+                        }
+                        lastRange = 0;
+                        firstRange = 0;
                     }
                     Add( _entry );
                 }

@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenIOCMap", "GenIOCMap\GenIOCMap.csproj", "{FACEEE88-4DFD-4FFA-9411-E2B38AAF66C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenIOCMap", "GenIOCMap\GenIOCMap.csproj", "{FACEEE88-4DFD-4FFA-9411-E2B38AAF66C0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ecl.Unicode", "ecl.Unicode\ecl.Unicode.csproj", "{1B2DBBB4-D3F7-49CF-B447-50704DD136C6}"
 EndProject

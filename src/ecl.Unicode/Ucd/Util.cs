@@ -204,7 +204,12 @@ namespace ecl.Unicode.Ucd {
         public static string GetCode( this UnicodeCharacterType type ) {
             return _unicodeCharacterCodes[ (int)type ];
         }
-
+        public static char FirstCode( this UnicodeCharacterType type ) {
+            return _unicodeCharacterCodes[ (int)type ][0];
+        }
+        public static bool IsLetter( this UnicodeCharacterType type ) {
+            return FirstCode( type ) == 'L';
+        }
         internal static Dictionary<string, UnicodeCharacterType> GetTypeMap() {
             var map = new Dictionary<string, UnicodeCharacterType>( StringComparer.OrdinalIgnoreCase );
             for ( int i = 0; i < _unicodeCharacterCodes.Length; i++ ) {
@@ -234,6 +239,87 @@ namespace ecl.Unicode.Ucd {
 
 
             return map;
+        }
+
+        private static readonly Dictionary<string, GraphemeClusterBreak> _graphemeClusterBreakMap = GetGraphemeClusterBreak();
+
+        private static Dictionary<string, GraphemeClusterBreak> GetGraphemeClusterBreak() {
+            return new Dictionary<string, GraphemeClusterBreak>( StringComparer.OrdinalIgnoreCase ) {
+                { "Prepend", GraphemeClusterBreak.Prepend },
+                { "CR", GraphemeClusterBreak.CarriageReturn },
+                { "LF", GraphemeClusterBreak.LineFeed },
+                { "Control", GraphemeClusterBreak.Control },
+                { "Extend", GraphemeClusterBreak.Extend },
+                { "Regional_Indicator", GraphemeClusterBreak.RegionalIndicator },
+                { "SpacingMark", GraphemeClusterBreak.SpacingMark },
+                { "L", GraphemeClusterBreak.L },
+                { "V", GraphemeClusterBreak.V },
+                { "T", GraphemeClusterBreak.T },
+                { "LV", GraphemeClusterBreak.LV },
+                { "LVT", GraphemeClusterBreak.LVT },
+                { "ZWJ", GraphemeClusterBreak.ZeroWidthJoiner }
+            };
+        }
+
+        private static readonly Dictionary<string, WordBreak> _wordBreakMap = GetWordBreaks();
+
+        private static Dictionary<string, WordBreak> GetWordBreaks() {
+            return new Dictionary<string, WordBreak>( StringComparer.OrdinalIgnoreCase ) {
+                { "Double_Quote", WordBreak.DoubleQuote },
+                { "Single_Quote", WordBreak.SingleQuote },
+                { "Hebrew_Letter", WordBreak.HebrewLetter },
+                { "CR", WordBreak.Cr },
+                { "LF", WordBreak.Lf },
+                { "Newline", WordBreak.Newline },
+                { "Extend", WordBreak.Extend },
+                { "Regional_Indicator", WordBreak.RegionalIndicator },
+                { "Format", WordBreak.Format },
+                { "Katakana", WordBreak.Katakana },
+                { "ALetter", WordBreak.ALetter },
+                { "MidLetter", WordBreak.MidLetter },
+                { "MidNum", WordBreak.MidNum },
+                { "MidNumLet", WordBreak.MidNumLet },
+                { "Numeric", WordBreak.Numeric },
+                { "ExtendNumLet", WordBreak.ExtendNumLet },
+                { "ZWJ", WordBreak.ZeroWidthJoiner },
+                { "WSegSpace", WordBreak.WSegSpace }
+            };
+        }
+
+        private static readonly Dictionary<string, SentenceBreak> _sentenceBreakMap = GetSentenceBreaks();
+
+        private static Dictionary<string, SentenceBreak> GetSentenceBreaks() {
+            return new Dictionary<string, SentenceBreak>( StringComparer.OrdinalIgnoreCase ) {
+                { "CR", SentenceBreak.CR },
+                { "LF", SentenceBreak.LF },
+                { "Extend", SentenceBreak.Extend },
+                { "Sep", SentenceBreak.Sep },
+                { "Format", SentenceBreak.Format },
+                { "Sp", SentenceBreak.Sp },
+                { "Lower", SentenceBreak.Lower },
+                { "Upper", SentenceBreak.Upper },
+                { "OLetter", SentenceBreak.OLetter },
+                { "Numeric", SentenceBreak.Numeric },
+                { "ATerm", SentenceBreak.ATerm },
+                { "STerm", SentenceBreak.STerm },
+                { "Close", SentenceBreak.Close },
+                { "SContinue", SentenceBreak.SContinue },
+            };
+        }
+        internal static GraphemeClusterBreak ParseGraphemeClusterBreak( string text ) {
+            if (!_graphemeClusterBreakMap.TryGetValue( text, out var result ))
+                return 0;
+            return result;
+        }
+        internal static SentenceBreak ParseSentenceBreak( string text ) {
+            if (!_sentenceBreakMap.TryGetValue( text, out var result ))
+                return 0;
+            return result;
+        }
+        internal static WordBreak ParseWordBreak( string text ) {
+            if (!_wordBreakMap.TryGetValue( text, out var result ))
+                return 0;
+            return result;
         }
 
         //internal static Dictionary<string, Script> GetScriptsMap() {
