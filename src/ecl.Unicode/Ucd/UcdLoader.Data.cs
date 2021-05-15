@@ -57,7 +57,7 @@ namespace ecl.Unicode.Ucd {
             Script = 64,
             ScriptExtensions = 128,
             /// <summary>
-            /// Don'Load entries above 0x052F
+            /// Don't Load entries above 0x052F
             /// </summary>
             EuropeOnly = 256,
 

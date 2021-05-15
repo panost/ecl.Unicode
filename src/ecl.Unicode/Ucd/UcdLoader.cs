@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace ecl.Unicode.Ucd {
         private ZipLoader _fileLoader;
         private readonly int _maxCodePoint;
 
-        public UcdLoader( string ucdFileName, LoadOptions options ) {
+        public UcdLoader( string ucdFileName, LoadOptions options = 0 ) {
             _fileLoader = new ZipLoader( ucdFileName );
             _options = options;
             if ( ( options & LoadOptions.AllCodes ) != 0 ) {
@@ -177,6 +178,16 @@ namespace ecl.Unicode.Ucd {
                 return _allProperties;
             }
         }
+
+        public UcdCodeProperty GetCodeProperty( CodePointProperty property ) {
+            foreach ( UcdCodeProperty p in CodeProperties ) {
+                if ( p.Value == property ) {
+                    return p;
+                }
+            }
+
+            return null;
+        }
         public UcdCodeProperty[] GetCodeProperties( int codePoint ) {
             if( CodeProperties.Length > 0 ) {
                 int end;
@@ -201,26 +212,37 @@ namespace ecl.Unicode.Ucd {
             var map = new Dictionary<string, UcdCodeProperty>( StringComparer.OrdinalIgnoreCase );
             var list = new List<UcdCodeProperty>();
             var _codePropMap = Util.GetPropertyMap();
-            CodePointProperty _lastValue = CodePointProperty.MaxValue;
-            using( LineReader reader = OpenLineReader( "PropList.txt" ) ) {
-                foreach( NamedRange range in GetNamedRanges( reader ) ) {
-                    UcdCodeProperty prop;
-                    if( !map.TryGetValue( range.Name, out prop ) ) {
-                        CodePointProperty propVal;
-                        if( !_codePropMap.TryGetValue( range.Name, out propVal ) ) {
-                            propVal = _lastValue++;
-                            _codePropMap.Add( range.Name, propVal );
+            CodePointProperty _lastValue = (CodePointProperty)(Enum.GetValues( typeof( CodePointProperty ) ).Length + 1);
+            foreach ( var value in Enum.GetValues( typeof( CodePointProperty ) ) ) {
+                Debug.WriteLine( value.ToString() );
+            }
+            void ReadFile(string fileName,bool isDerived) {
+                using ( LineReader reader = OpenLineReader( fileName ) ) {
+                    foreach ( NamedRange range in GetNamedRanges( reader ) ) {
+                        UcdCodeProperty prop;
+                        if ( !map.TryGetValue( range.Name, out prop ) ) {
+                            CodePointProperty propVal;
+                            if ( !_codePropMap.TryGetValue( range.Name, out propVal ) ) {
+                                propVal = _lastValue++;
+                                _codePropMap.Add( range.Name, propVal );
+                                //Debug.WriteLine( $"New Property {range.Name}:{(int)propVal} ({isDerived})" );
+                            }
+                            //var val = ParseCodeProperty( range.Name );
+                            prop = new UcdCodeProperty( range.Name, propVal ) {
+                                IsDerived = isDerived
+                            };
+                            map.Add( range.Name, prop );
+                            list.Add( prop );
                         }
-                        //var val = ParseCodeProperty( range.Name );
-                        prop = new UcdCodeProperty( range.Name, propVal );
-                        map.Add( range.Name, prop );
-                        list.Add( prop );
+                        var propRange = new UcdRange<UcdCodeProperty>( range.Begin, range.End, prop );
+                        prop.Ranges.Add( propRange );
+                        all.Add( propRange );
                     }
-                    var propRange = new UcdRange<UcdCodeProperty>( range.Begin, range.End, prop );
-                    prop.Ranges.Add( propRange );
-                    all.Add( propRange );
                 }
             }
+
+            ReadFile( "PropList.txt", false );
+            ReadFile( "DerivedCoreProperties.txt", true );
             _allProperties = list.ToArray();
             _propertyRanges = all.ToArray();
             UcdRange.Sort( _propertyRanges );

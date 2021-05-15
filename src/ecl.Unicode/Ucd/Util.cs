@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using ecl.Unicode.Cldr.Doc;
 
 namespace ecl.Unicode.Ucd {
     public static class Util {
@@ -117,50 +118,30 @@ namespace ecl.Unicode.Ucd {
             return map;
         }
 
-        private static readonly string[] _unicodeProperties = {
-            null,
-            "ASCII_Hex_Digit", // CodePointProperty.ASCII_Hex_Digit
-            "Bidi_Control", // CodePointProperty.Bidi_Control
-            "Dash", // CodePointProperty.Dash
-            "Deprecated", // CodePointProperty.Deprecated
-            "Diacritic", // CodePointProperty.Diacritic
-            "Extender", // CodePointProperty.Extender
-            "Hex_Digit", // CodePointProperty.Hex_Digit
-            "Hyphen", // CodePointProperty.Hyphen
-            "Ideographic", // CodePointProperty.Ideographic
-            "IDS_Binary_Operator", // CodePointProperty.IDS_Binary_Operator
-            "IDS_Trinary_Operator", // CodePointProperty.IDS_Trinary_Operator
-            "Join_Control", // CodePointProperty.Join_Control
-            "Logical_Order_Exception", // CodePointProperty.Logical_Order_Exception
-            "Noncharacter_Code_Point", // CodePointProperty.Noncharacter_Code_Point
-            "Other_Alphabetic", // CodePointProperty.Other_Alphabetic
-            "Other_Default_Ignorable_Code_Point", // CodePointProperty.Other_Default_Ignorable_Code_Point
-            "Other_Grapheme_Extend", // CodePointProperty.Other_Grapheme_Extend
-            "Other_ID_Continue", // CodePointProperty.Other_ID_Continue
-            "Other_ID_Start", // CodePointProperty.Other_ID_Start
-            "Other_Lowercase", // CodePointProperty.Other_Lowercase
-            "Other_Math", // CodePointProperty.Other_Math
-            "Other_Uppercase", // CodePointProperty.Other_Uppercase
-            "Pattern_Syntax", // CodePointProperty.Pattern_Syntax
-            "Quotation_Mark", // CodePointProperty.Quotation_Mark
-            "Radical", // CodePointProperty.Radical
-            "Soft_Dotted", // CodePointProperty.Soft_Dotted
-            "STerm", // CodePointProperty.STerm
-            "Terminal_Punctuation", // CodePointProperty.Terminal_Punctuation
-            "Unified_Ideograph", // CodePointProperty.Unified_Ideograph
-            "Variation_Selector", // CodePointProperty.Variation_Selector
-            "White_Space", // CodePointProperty.White_Space
+        private static readonly EnumMap<CodePointProperty> _propertiesMap = new EnumMap<CodePointProperty>();
 
-        };
+        private static readonly string[] _unicodeProperties = GetPropertyCodes();
+        private static int _maxPropertyValue;
+        /// <summary>
+        /// 
+        /// </summary>
+        public static int MaxPropertyValue => _maxPropertyValue;
+
+        private static string[] GetPropertyCodes() {
+            _maxPropertyValue = _propertiesMap.Count + 1;
+            var m = new string[ _maxPropertyValue ];
+            foreach ( var pair in _propertiesMap ) {
+                m[ (int)pair.Value ] = pair.Key;
+            }
+            return m;
+        }
+
         public static string GetCode( this CodePointProperty property ) {
             return _unicodeProperties[ (int)property ];
         }
         internal static Dictionary<string, CodePointProperty> GetPropertyMap() {
-            var map = new Dictionary<string, CodePointProperty>( StringComparer.OrdinalIgnoreCase );
-            for( int i = 1; i < _unicodeProperties.Length; i++ ) {
-                map.Add( _unicodeProperties[ i ], (CodePointProperty)i );
-            }
-            return map;
+            return _propertiesMap;
+            //return new Dictionary<string, CodePointProperty>( _propertiesMap );
         }
         private static readonly string[] _unicodeCharacterCodes = {
             "Lu", // UnicodeCharacterType.LetterUppercase

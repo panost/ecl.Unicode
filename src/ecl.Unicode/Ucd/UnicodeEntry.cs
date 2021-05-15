@@ -20,6 +20,9 @@ namespace ecl.Unicode.Ucd {
                 return Uppercase;
             return CodeValue;
         }
+
+        private UnicodeCodePoint UnicodeCodePoint => (UnicodeCodePoint)CodeValue;
+
         /// <summary>
         /// if negative then it's the count
         /// and _decomposingStart2 an index in the decomposing map

@@ -3,21 +3,23 @@
 namespace ecl.Unicode.Ucd {
     public class UcdCodeProperty : CodeObjectBase {
         /// <summary>
-        /// 
+        /// Name of the property
         /// </summary>
-        public string Name {
-            get {
-                return _code;
-            }
-        }
+        public string Name => _code;
+
         private CodePointProperty _value;
         /// <summary>
         /// 
         /// </summary>
-        public CodePointProperty Value {
-            get {
-                return _value;
-            }
+        public CodePointProperty Value => _value;
+
+        private bool _isDerived;
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsDerived {
+            get => _isDerived;
+            set => _isDerived = value;
         }
 
         public UcdCodeProperty( string name, CodePointProperty value ) {
@@ -29,25 +31,19 @@ namespace ecl.Unicode.Ucd {
         /// <summary>
         /// 
         /// </summary>
-        public List<UcdRange<UcdCodeProperty>> Ranges {
-            get {
-                return _ranges;
+        public List<UcdRange<UcdCodeProperty>> Ranges => _ranges;
+
+        public bool Contains( int code ) {
+            foreach ( UcdRange<UcdCodeProperty> range in _ranges ) {
+                if ( range.Contains( code ) ) {
+                    return true;
+                }
             }
+
+            return false;
         }
 
-        private ulong _mask;
-        /// <summary>
-        /// 
-        /// </summary>
-        public ulong Mask {
-            get {
-                return _mask;
-            }
-            set {
-                _mask = value;
-            }
-        }
 
-        
+
     }
 }
