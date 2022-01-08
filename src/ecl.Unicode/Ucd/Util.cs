@@ -267,6 +267,18 @@ namespace ecl.Unicode.Ucd {
             };
         }
 
+        private static readonly Dictionary<string, EmojiType> _emojiMap = GetEmojiTypes();
+
+        private static Dictionary<string, EmojiType> GetEmojiTypes() {
+            return new Dictionary<string, EmojiType>( StringComparer.OrdinalIgnoreCase ) {
+                { "Emoji", EmojiType.Standard },
+                { "Emoji_Presentation", EmojiType.Presentation },
+                { "Emoji_Modifier", EmojiType.Modifier },
+                { "Emoji_Modifier_Base", EmojiType.ModifierBase },
+                { "Emoji_Component", EmojiType.Component },
+                { "Extended_Pictographic", EmojiType.Pictographic },
+            };
+        }
         private static readonly Dictionary<string, SentenceBreak> _sentenceBreakMap = GetSentenceBreaks();
 
         private static Dictionary<string, SentenceBreak> GetSentenceBreaks() {
@@ -288,21 +300,29 @@ namespace ecl.Unicode.Ucd {
             };
         }
         internal static GraphemeClusterBreak ParseGraphemeClusterBreak( string text ) {
-            if (!_graphemeClusterBreakMap.TryGetValue( text, out var result ))
+            if (!_graphemeClusterBreakMap.TryGetValue( text, out var result )) {
+                throw new ApplicationException( $"Unable to find value {text}" );
                 return 0;
+            }
             return result;
         }
         internal static SentenceBreak ParseSentenceBreak( string text ) {
             if (!_sentenceBreakMap.TryGetValue( text, out var result ))
-                return 0;
+                throw new ApplicationException( $"Unable to find value {text}" );
             return result;
         }
         internal static WordBreak ParseWordBreak( string text ) {
-            if (!_wordBreakMap.TryGetValue( text, out var result ))
-                return 0;
+            if (!_wordBreakMap.TryGetValue( text, out var result )) {
+                throw new ApplicationException( $"Unable to find value {text}" );
+            }
             return result;
         }
-
+        internal static EmojiType ParseEmoji( string text ) {
+            if ( !_emojiMap.TryGetValue( text, out var result ) ) {
+                throw new ApplicationException( $"Unable to find value {text}" );
+            }
+            return result;
+        }
         //internal static Dictionary<string, Script> GetScriptsMap() {
         //    var map = new Dictionary<string, Script>( StringComparer.OrdinalIgnoreCase );
 

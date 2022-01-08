@@ -122,8 +122,7 @@ namespace ecl.Unicode.Cldr.Doc {
             return true;
         }
         internal static LdmlAttribute GetAttribute( string name ) {
-            LdmlAttribute attrName;
-            if ( !Enum.TryParse( name, true, out attrName ) ) {
+            if ( !Enum.TryParse( name, true, out LdmlAttribute attrName ) ) {
                 throw new ArgumentException( "Unknown attribute " + name, nameof(name) );
             }
             return attrName;

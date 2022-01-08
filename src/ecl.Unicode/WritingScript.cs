@@ -495,6 +495,12 @@ namespace ecl.Unicode {
 		KatakanaOrHiragana = 412,
 		
 		/// <summary>
+		/// Kawi
+		/// <para>'Kawi'</para>
+		/// </summary>
+		Kawi = 368,
+		
+		/// <summary>
 		/// Kayah Li
 		/// <para>'Kali'</para>
 		/// </summary>
@@ -765,6 +771,12 @@ namespace ecl.Unicode {
 		Nabataean = 159,
 		
 		/// <summary>
+		/// Nag Mundari
+		/// <para>'Nagm'</para>
+		/// </summary>
+		NagMundari = 295,
+		
+		/// <summary>
 		/// Naxi Geba (na²¹ɕi³³ gʌ²¹ba²¹, 'Na-'Khi ²Ggŏ-¹baw, Nakhi Geba)
 		/// <para>'Nkgb'</para>
 		/// </summary>
@@ -873,6 +885,12 @@ namespace ecl.Unicode {
 		OldTurkic = 175,
 		
 		/// <summary>
+		/// Old Uyghur
+		/// <para>'Ougr'</para>
+		/// </summary>
+		OldUyghur = 143,
+		
+		/// <summary>
 		/// Oriya (Odia)
 		/// <para>'Orya'</para>
 		/// </summary>
@@ -921,10 +939,34 @@ namespace ecl.Unicode {
 		Phoenician = 115,
 		
 		/// <summary>
+		/// Proto-Cuneiform
+		/// <para>'Pcun'</para>
+		/// </summary>
+		ProtoCuneiform = 15,
+		
+		/// <summary>
+		/// Proto-Elamite
+		/// <para>'Pelm'</para>
+		/// </summary>
+		ProtoElamite = 16,
+		
+		/// <summary>
+		/// Proto-Sinaitic
+		/// <para>'Psin'</para>
+		/// </summary>
+		ProtoSinaitic = 103,
+		
+		/// <summary>
 		/// Psalter Pahlavi
 		/// <para>'Phlp'</para>
 		/// </summary>
 		PsalterPahlavi = 132,
+		
+		/// <summary>
+		/// Ranjana
+		/// <para>'Ranj'</para>
+		/// </summary>
+		Ranjana = 303,
 		
 		/// <summary>
 		/// Rejang (Redjang, Kaganga)
@@ -1035,6 +1077,12 @@ namespace ecl.Unicode {
 		Sundanese = 362,
 		
 		/// <summary>
+		/// Sunuwar
+		/// <para>'Sunu'</para>
+		/// </summary>
+		Sunuwar = 274,
+		
+		/// <summary>
 		/// Syloti Nagri
 		/// <para>'Sylo'</para>
 		/// </summary>
@@ -1113,6 +1161,12 @@ namespace ecl.Unicode {
 		Tamil = 346,
 		
 		/// <summary>
+		/// Tangsa
+		/// <para>'Tnsa'</para>
+		/// </summary>
+		Tangsa = 275,
+		
+		/// <summary>
 		/// Tangut
 		/// <para>'Tang'</para>
 		/// </summary>
@@ -1161,6 +1215,12 @@ namespace ecl.Unicode {
 		Tirhuta = 326,
 		
 		/// <summary>
+		/// Toto
+		/// <para>'Toto'</para>
+		/// </summary>
+		Toto = 294,
+		
+		/// <summary>
 		/// Ugaritic
 		/// <para>'Ugar'</para>
 		/// </summary>
@@ -1189,6 +1249,12 @@ namespace ecl.Unicode {
 		/// <para>'Visp'</para>
 		/// </summary>
 		VisibleSpeech = 280,
+		
+		/// <summary>
+		/// Vithkuqi
+		/// <para>'Vith'</para>
+		/// </summary>
+		Vithkuqi = 228,
 		
 		/// <summary>
 		/// Wancho

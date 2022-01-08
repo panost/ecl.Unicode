@@ -169,32 +169,33 @@ namespace ecl.Unicode.Cldr.Doc {
         }
         private Stream TryOpenFile( string folder, string name, out string fileName ) {
             if ( _zip != null ) {
-                fileName = "common/" + folder + "/" + name + ".xml";
+                fileName = "common/" + folder + "/" + name;
                 ZipArchiveEntry zip = _zip.GetEntry( fileName );
                 if ( zip != null ) {
                     return zip.Open();
                 }
             } else {
-                fileName = Path.Combine( Root, folder, name + ".xml" );
+                fileName = Path.Combine( Root, folder, name );
                 if ( File.Exists( fileName ) ) {
                     return new FileStream( fileName, FileMode.Open, FileAccess.Read, FileShare.Read );
                 }
             }
             return null;
         }
+        
         internal XmlReader TryOpenXmlFile( string folder, string name ) {
-            Stream stream = TryOpenFile( folder, name, out _ );
+            Stream stream = TryOpenFile( folder, name + ".xml", out _ );
             if ( stream != null ) {
                 return XmlReader.Create( stream, _xmlSettings );
             }
             return null;
         }
         private XmlReader OpenXmlFile( string folder, string name ) {
-            return XmlReader.Create( OpenFile( folder, name ), _xmlSettings );
+            return XmlReader.Create( OpenFile( folder, name + ".xml" ), _xmlSettings );
         }
         private Stream OpenFile( string folder, string name ) {
             string fileName;
-            Stream stream = TryOpenFile( folder, name, out fileName );
+            Stream stream = TryOpenFile( folder, name , out fileName );
             if ( stream != null )
                 return stream;
             throw new FileNotFoundException( fileName );

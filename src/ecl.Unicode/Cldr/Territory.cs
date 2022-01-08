@@ -8,14 +8,24 @@ namespace ecl.Unicode.Cldr {
     [Flags]
     public enum TerritoryTypes : byte {
         Group = 1,
-        Container = 2,
+        /// <summary>
+        /// Territory contains others, hierarchy, group or subdivisions
+        /// </summary>
+        Containment = 2,
         Deprecated = 4,
 
         //Code = 8,
         MetaGroup = 16,
         Obsolete = 32,
 
-        Subdivision = 64
+        /// <summary>
+        /// Subdivision Containment
+        /// </summary>
+        /// <cite>
+        /// https://unicode-org.github.io/cldr/ldml/tr35-info.html#Subdivision_Containment
+        /// https://en.wikipedia.org/wiki/ISO_3166-2
+        /// </cite>
+        Subdivisioned = 64
     }
 
     [System.Diagnostics.DebuggerDisplay( "Code = {_code}, {GetDebugHint()}" )]

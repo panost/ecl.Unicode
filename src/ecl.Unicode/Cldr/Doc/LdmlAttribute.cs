@@ -1,4 +1,5 @@
 ﻿namespace ecl.Unicode.Cldr.Doc {
+
     public enum LdmlAttribute : byte {
         None,
 
@@ -18,7 +19,18 @@
 
         Numbers,
         Sample,
+
+        /// <summary>
+        /// Gender, <see cref="GenderListType"/> and <see cref="GenderProperty"/>
+        /// </summary>
+        Gender,
+
+        /// <summary>
+        /// Case, <see cref="CaseProperty"/>
+        /// </summary>
+        Case,
+
         // flag attributes
-        Draft=200
+        Draft = 200
     };
 }

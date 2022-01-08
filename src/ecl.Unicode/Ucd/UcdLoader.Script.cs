@@ -196,8 +196,10 @@ namespace ecl.Unicode.Ucd {
             using ( LineReader reader = OpenLineReader( "Scripts.txt" ) ) {
                 ldr.LoadScripts( reader, true );
             }
-            using ( LineReader reader = OpenLineReader( "ScriptExtensions.txt" ) ) {
-                ldr.LoadScripts( reader, false );
+            if ( ( _options & LoadOptions.ScriptExtensions ) != 0 ) {
+                using ( LineReader reader = OpenLineReader( "ScriptExtensions.txt" ) ) {
+                    ldr.LoadScripts( reader, false );
+                }
             }
         }
     }

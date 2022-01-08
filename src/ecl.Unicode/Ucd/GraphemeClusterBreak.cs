@@ -1,4 +1,8 @@
 ﻿namespace ecl.Unicode.Ucd {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <cite>https://unicode.org/reports/tr29/</cite>
     public enum GraphemeClusterBreak : byte {
         Other,
         Prepend,

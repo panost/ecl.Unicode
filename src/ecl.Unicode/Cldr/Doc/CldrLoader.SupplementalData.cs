@@ -111,6 +111,7 @@ namespace ecl.Unicode.Cldr.Doc {
             }
             List<CalendarPreference> _calendarPreferences = new List<CalendarPreference>();
 
+            [DebuggerDisplay("{Code}:{tp}")]
             struct TerContains {
                 public string Code;
                 public string contains;
@@ -137,7 +138,7 @@ namespace ecl.Unicode.Cldr.Doc {
                     }
                 }
                 if ( ter.Code.HasValue() && ter.contains.HasValue() ) {
-                    ter.tp = TerritoryTypes.Subdivision;
+                    ter.tp = TerritoryTypes.Subdivisioned;
                     _terContains.Add( ter );
                 }
             }
@@ -658,12 +659,10 @@ namespace ecl.Unicode.Cldr.Doc {
                 var territories = _loader._territories;
                 foreach ( TerContains grp in _terContains ) {
                     Territory ter = territories.GetOrCreate( grp.Code );
-                    ter.Type |= TerritoryTypes.Container;
-                    if( ( grp.tp & TerritoryTypes.Group ) != 0 ) {
-                        ter.Type |= TerritoryTypes.Group;
-                    }
+                    ter.Type |= TerritoryTypes.Containment;
+                    ter.Type |= grp.tp & ( TerritoryTypes.Group | TerritoryTypes.Subdivisioned );
 
-                    foreach( string child in grp.contains.SplitAtSpaces() ) {
+                    foreach ( string child in grp.contains.SplitAtSpaces() ) {
                         Territory terChild=territories.GetOrCreate( child );
                         children.AddGroup( ter, terChild );
                         if ( ( grp.tp & TerritoryTypes.Group ) == 0 ) {

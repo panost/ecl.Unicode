@@ -125,7 +125,15 @@ namespace ecl.Unicode.Ucd {
                 return _blocks;
             }
         }
-
+        public EnumRange<EmojiType>[] LoadEmoji() {
+            var list = new List<EnumRange<EmojiType>>();
+            using ( LineReader reader = OpenLineReader( "emoji", "emoji-data.txt" ) ) {
+                foreach ( var range in GetRanges( reader, Util.ParseEmoji ) ) {
+                    list.Add( range );
+                }
+            }
+            return list.ToArray();
+        }
         public EnumRange<WordBreak>[] LoadWordBreak() {
             var list = new List<EnumRange<WordBreak>>();
             using( LineReader reader = OpenLineReader( "auxiliary", "WordBreakProperty.txt" ) ) {
