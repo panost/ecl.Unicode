@@ -5,17 +5,17 @@ using ecl.Unicode.Cldr.Doc;
 
 namespace ecl.Unicode.Cldr.Locale {
     public class NumberCurrenciesNode : LdmlAnyNode {
-        private Dictionary<Currency, LocaleCurrency> _nodes;
+        private Dictionary<Currency, LocaleCurrency> _currencyNodes;
         /// <summary>
         /// 
         /// </summary>
         internal Dictionary<Currency, LocaleCurrency> Nodes {
             get {
-                if ( _nodes == null ) {
-                    _nodes = CreateMap();
+                if ( _currencyNodes == null ) {
+                    _currencyNodes = CreateMap();
                 }
 
-                return _nodes;
+                return _currencyNodes;
             }
         }
 

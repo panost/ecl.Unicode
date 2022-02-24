@@ -302,7 +302,6 @@ namespace ecl.Unicode.Ucd {
         internal static GraphemeClusterBreak ParseGraphemeClusterBreak( string text ) {
             if (!_graphemeClusterBreakMap.TryGetValue( text, out var result )) {
                 throw new ApplicationException( $"Unable to find value {text}" );
-                return 0;
             }
             return result;
         }

@@ -87,11 +87,6 @@ namespace ecl.Unicode.Cldr.Doc {
             _currencies.Add( currency.Code, currency );
         }
 
-        struct CalendarPreference {
-            public string[] Territories;
-            public string[] Calendars;
-        }
-
         partial class MetaDataLoader {
             //internal readonly Dictionary<string, Territory> _territories = new Dictionary<string, Territory>( StringComparer.OrdinalIgnoreCase );
             private void LoadCodeMappings( string elmName, List<AttributeValue> list ) {
@@ -109,7 +104,6 @@ namespace ecl.Unicode.Cldr.Doc {
                     break;
                 }
             }
-            List<CalendarPreference> _calendarPreferences = new List<CalendarPreference>();
 
             [DebuggerDisplay("{Code}:{tp}")]
             struct TerContains {

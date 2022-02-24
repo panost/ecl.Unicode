@@ -173,9 +173,9 @@ namespace ecl.Unicode.Ucd {
                 char[] surrogate = new char[ 2 ];
                 int utf32 = CodeValue - 0x10000;
                 const char HIGH_SURROGATE_START = '\ud800';
-                const char HIGH_SURROGATE_END = '\udbff';
+                //const char HIGH_SURROGATE_END = '\udbff';
                 const char LOW_SURROGATE_START = '\udc00';
-                const char LOW_SURROGATE_END = '\udfff';
+                //const char LOW_SURROGATE_END = '\udfff';
 
                 b.Append( (char)( ( utf32 / 0x400 ) + (int)HIGH_SURROGATE_START ) );
                 b.Append( (char)( ( utf32 % 0x400 ) + (int)LOW_SURROGATE_START ) );

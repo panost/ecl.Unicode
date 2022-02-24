@@ -3,7 +3,6 @@
 namespace ecl.Unicode.Ucd {
     public class UcdBlock : UcdRange, IComparable<UcdBlock>{
         public readonly string Name;
-        internal readonly UcdLoader _context;
 
         internal UcdBlock( int begin, int end, string name )
             : base( begin, end ) {

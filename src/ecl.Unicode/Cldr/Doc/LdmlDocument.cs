@@ -249,7 +249,6 @@ namespace ecl.Unicode.Cldr.Doc {
             string path = null;
             bool alt = false;
             if ( reader.MoveToFirstAttribute() ) {
-                List<LdmlAttributeValue> list = null;
 
                 while ( true ) {
                     switch ( reader.Name ) {
