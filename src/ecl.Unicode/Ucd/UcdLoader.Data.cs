@@ -125,11 +125,28 @@ namespace ecl.Unicode.Ucd {
                 return allEntries;
             }
 
-            
 
-            
+            /*
+             * Columns
+             * 
+0	Code value
+1	Character name
+2	General category
+3	Canonical combining classes
+4	Bidirectional category
+5	Character decomposition mapping
+6	Decimal digit value
+7	Digit value
+8	Numeric value
+8	Mirrored
+10	Unicode 1.0 Name
+11	ISO 10646 comment field
+12	Uppercase mapping
+13	Lowercase mapping
+14	Titlecase mapping
+             
+             */
 
-            
             public void Load( LineReader reader ) {
                 Dictionary<int, string> alternativeNames = _owner.AlternativeNames;
                 List<string> segs = new List<string>();
@@ -162,6 +179,10 @@ namespace ecl.Unicode.Ucd {
                             if ( name[ 0 ] == '<' ) {
                                 if( name.SameName( "<control>" ) ) {
                                     dscr = segs[ 10 ];
+                                    if (dscr.HasValue() )
+                                    {
+                                        name = dscr;
+                                    }
                                 } else if ( name.EndsWith( FirstRange, StringComparison.OrdinalIgnoreCase ) ) {
                                     firstRange = _entry.CodeValue;
                                     name = name.Substring( 1, name.Length - 1 - FirstRange.Length );

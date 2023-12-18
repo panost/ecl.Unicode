@@ -116,7 +116,7 @@ namespace ecl.Unicode.Ucd {
                 switch ( _numericType ) {
                 case NumericEntryType.None:
                 case NumericEntryType.Fraction:
-                    return long.MaxValue;
+                    return 0;
                 //case NumericEntryType.Value:
                 //    return _value.Value;
                 case NumericEntryType.Billions:

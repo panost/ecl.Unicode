@@ -123,6 +123,11 @@ namespace ecl.Unicode.Cldr.Doc {
         }
         internal static LdmlAttribute GetAttribute( string name ) {
             if ( !Enum.TryParse( name, true, out LdmlAttribute attrName ) ) {
+                switch (name)
+                {
+                    case "xml:space":
+                        return LdmlAttribute.Space;
+                }
                 throw new ArgumentException( "Unknown attribute " + name, nameof(name) );
             }
             return attrName;

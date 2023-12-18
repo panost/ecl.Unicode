@@ -30,7 +30,18 @@
         /// </summary>
         Case,
 
+        /// <summary>
+        /// xml:space
+        /// </summary>
+        Space,
+        Order,
+        Length,
+        Usage,
+        Formality,
+        Item,
+
+		Parameter,
         // flag attributes
-        Draft = 200
+        Draft = 200,
     };
 }
