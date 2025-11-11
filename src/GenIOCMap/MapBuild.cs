@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using ecl.Unicode.Ucd;
@@ -12,17 +13,37 @@ namespace GenIOCMap {
             _loader = loader;
             loader.EnsureDataLoaded();
             var iocMap =_iocMap= new Dictionary<int, int>();
-
-            foreach ( var line in File.ReadLines( @"../../bin/OrdinalIgnoreCase.txt" ) ) {
+			
+            foreach ( var line in File.ReadLines( @"../../../bin/OrdinalIgnoreCase.txt" ) ) {
                 var s = line.Split( new[] { ' ' }, 3 );
                 if ( int.TryParse( s[ 0 ], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int from )
                      && int.TryParse( s[ 1 ], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int to )) {
-                    iocMap.Add( from, to );
+
+					if ( iocMap.TryGetValue( from, out int other ) ) {
+						if ( ShouldChange( from, other, to ) ) {
+							iocMap[ from ] = to;
+						}
+					} else {
+						iocMap.Add( from, to );
+					}
                 }
             }
 
         }
-        public void BuildToUpperMap(bool text=false) {
+		private bool ShouldChange( int from, int old, int to ) {
+			UnicodeEntry oldEntry = _loader[ old ];
+			switch ( oldEntry.Category ) {
+			case UnicodeCharacterType.LetterUppercase:
+			case UnicodeCharacterType.LetterTitlecase:
+				return false;
+			case UnicodeCharacterType.LetterLowercase:
+				return true;
+				//break;
+			}
+			Debug.WriteLine( $"hh" );
+			return true;
+		}
+		public void BuildToUpperMap(bool text=false) {
             var map = new InterleaveMap();
 
             foreach ( KeyValuePair<int, int> pair in _iocMap ) {

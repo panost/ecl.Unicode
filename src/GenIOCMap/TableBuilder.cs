@@ -101,6 +101,9 @@ namespace GenIOCMap {
                         foreach ( var right in rightblock.Entries ) {
                             if ( right.CodePoint == left.CodePoint && right.Value == left.Value )
                                 continue;
+							//if ( left.CodePoint == 0x0003B9 && right.CodePoint == 0x000345 ) {
+							//	Debug.WriteLine( $"aaaa:{string.Equals( left.Value, right.Value, comparison )}" );
+							//}
                             int cmp = string.Compare( left.Value, right.Value, comparison );
                             if ( cmp == 0 ) {
                                 w.WriteLine( "{0:X6} {1:X6} ; ({2}) == ({3}){4}",
@@ -114,7 +117,7 @@ namespace GenIOCMap {
         }
 
         public void WriteCodes( StringComparison comparison ) {
-            using ( var w = File.CreateText( @"../../bin/" + comparison + ".txt" ) ) {
+            using ( var w = File.CreateText( @"../../../bin/" + comparison + ".txt" ) ) {
                 WriteCodes( w, comparison );
             }
         }

@@ -6,7 +6,7 @@ using GenIOCMap.Testing;
 
 namespace GenIOCMap {
     class Program {
-        private const string UcdFileName = @"f:\Checkouts\Unicode\Ucd\12.1.0\UCD.zip";
+        private const string UcdFileName = @"h:\Checkouts\Unicode\Ucd\15.1.0\UCD.zip";
 
         private static UcdLoader _ucd;
         /// <summary>
@@ -47,10 +47,10 @@ namespace GenIOCMap {
             //DecomposeTest();
             //Debug.WriteLine( $"Ĳ : {"ĲώΏ".Normalize(NormalizationForm.FormKC).ToCharArray()}" );
             //new TableBuilder( Ucd ).WriteCodes( StringComparison.OrdinalIgnoreCase );
-            new ScannerMapBuilder( Ucd ).WriteBreakMap();
+            //new ScannerMapBuilder( Ucd ).WriteBreakMap();
             //new ScannerMapBuilder( Ucd ).WriteScriptMap();
             //new ScannerMapBuilder( Ucd ).WriteCodes2();
-            //new MapBuild( Ucd ).BuildToUpperMap();
+            new MapBuild( Ucd ).BuildToUpperMap();
             //new TestCompEq(Ucd).TestCompare();
             //new TestCompEq(Ucd).TestEquals();
             //new HashCodeTest( Ucd ).TestHashCode();

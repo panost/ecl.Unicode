@@ -41,6 +41,8 @@
         Item,
 
 		Parameter,
+
+		Menu,
         // flag attributes
         Draft = 200,
     };
