@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ecl.Unicode.Ucd {
@@ -81,7 +82,7 @@ namespace ecl.Unicode.Ucd {
         public struct CaseFoldingEntry : IComparable<CaseFoldingEntry>, IComparable<int> {
             public Values<int> Mapping;
             public int Code;
-            public CaseFoldingStatus Status;
+			public CaseFoldingStatus Status;
             public int CompareTo( CaseFoldingEntry other ) {
                 int cmp = Code.CompareTo( other.Code );
                 if ( cmp == 0 )
@@ -92,9 +93,19 @@ namespace ecl.Unicode.Ucd {
             public int CompareTo( int other ) {
                 return Code.CompareTo( other );
             }
+			public override string ToString() {
+				return $"U+{Code:X4} '{(char)Code}' -> [{string.Join( ",", Mapping )}] ({Status})";
+			}
         }
-
-        public int GetFoldingCharacter( int codeValue ) {
+		public ArraySegment<CaseFoldingEntry> GetFoldingCharacters( int codeValue ) {
+			int idx = CaseFoldings.BinaryFind( codeValue );
+			idx = CaseFoldings.GetRange( codeValue, out int stop );
+			if ( idx >= 0 ) {
+				return new ArraySegment<CaseFoldingEntry>( _caseFoldings, idx, stop - idx + 1 );
+			}
+			return default;
+		}
+		public int GetFoldingCharacter( int codeValue ) {
             int idx = CaseFoldings.BinaryFind( codeValue );
             idx = CaseFoldings.GetRange( codeValue, out int stop );
             if ( idx >= 0 ) {
