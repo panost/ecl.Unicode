@@ -94,10 +94,10 @@ namespace ecl.Unicode.Ucd {
                 return Code.CompareTo( other );
             }
 			public override string ToString() {
-				return $"U+{Code:X4} '{(char)Code}' -> [{string.Join( ",", Mapping )}] ({Status})";
+				return $"U+{Code:X4} '{(char)Code}' ({Status}) -> [{string.Join( ",", Mapping )}]";
 			}
         }
-		public ArraySegment<CaseFoldingEntry> GetFoldingCharacters( int codeValue ) {
+		public ArraySegment<CaseFoldingEntry> GetFoldingRanges( int codeValue ) {
 			int idx = CaseFoldings.BinaryFind( codeValue );
 			idx = CaseFoldings.GetRange( codeValue, out int stop );
 			if ( idx >= 0 ) {
@@ -105,6 +105,39 @@ namespace ecl.Unicode.Ucd {
 			}
 			return default;
 		}
+		public (int index,int count) GetFoldingRange( int codeValue ) {
+			int idx = CaseFoldings.BinaryFind( codeValue );
+			idx = CaseFoldings.GetRange( codeValue, out int stop );
+			if ( idx >= 0 ) {
+				return (idx, stop - idx + 1);
+			}
+			return default;
+		}
+		public CaseFoldingEntry GetFoldingFullEntry( int codeValue ) {
+			var range = GetFoldingRange( codeValue );
+			if ( range.count > 0 ) {
+				for ( int i = 0; i < range.count; i++ ) {
+					ref CaseFoldingEntry ptr = ref _caseFoldings[ range.index + i ];
+					if ( ptr.Status == CaseFoldingStatus.Full ) {
+						return ptr;
+					}
+				}
+				for ( int i = 0; i < range.count; i++ ) {
+					ref CaseFoldingEntry ptr = ref _caseFoldings[ range.index + i ];
+					if ( ptr.Status == CaseFoldingStatus.Common ) {
+						return ptr;
+					}
+				}
+				for ( int i = 0; i < range.count; i++ ) {
+					ref CaseFoldingEntry ptr = ref _caseFoldings[ range.index + i ];
+					if ( ptr.Status == CaseFoldingStatus.Simple ) {
+						return ptr;
+					}
+				}
+			}
+			return default;
+		}
+
 		public int GetFoldingCharacter( int codeValue ) {
             int idx = CaseFoldings.BinaryFind( codeValue );
             idx = CaseFoldings.GetRange( codeValue, out int stop );
