@@ -113,6 +113,7 @@ namespace ecl.Unicode.Ucd {
 			}
 			return default;
 		}
+		
 		public CaseFoldingEntry GetFoldingFullEntry( int codeValue ) {
 			var range = GetFoldingRange( codeValue );
 			if ( range.count > 0 ) {
